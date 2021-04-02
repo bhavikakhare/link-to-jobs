@@ -2,4 +2,4 @@
 
 ## Contributors
 
-- Jerica
+- Jerica Chambers
