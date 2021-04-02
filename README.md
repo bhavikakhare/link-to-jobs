@@ -2,4 +2,6 @@
 
 ## Contributors
 
-- Jerica Chambers
+
+-- Bhavika Khare
+-- Jerica Chambers
