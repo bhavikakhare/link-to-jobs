@@ -2,4 +2,4 @@
 
 ## Contributors
 
--- Bhavika
+-- Bhavika Khare
