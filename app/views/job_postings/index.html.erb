@@ -8,18 +8,24 @@
       <th>Summary</th>
       <th>Category</th>
       <th>Experience Required (in years)</th>
+      <th> </th>
     </tr>
   </thead>
 
   <tbody>
     <% @job_postings.each do |jp| %>
       <tr>
-        <td><%= jp.title %></td>
+        <td><%= link_to jp.title, job_posting_path(jp) %></td>
         <td><%= jp.summary %></td>
         <td><%= jp.job_category %></td>
         <td><%= jp.experience_required %></td>
+        <td><%= link_to "Delete", job_posting_path(jp), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
 
 </table>
+
+ <p>
+  <%= link_to "Create New Job Posting", new_job_posting_path, class: 'btn btn-primary' %>
+  </p>
