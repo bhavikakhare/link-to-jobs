@@ -1,0 +1,25 @@
+<h1>Job Postings</h1>
+
+<table class="table table-hover">
+
+  <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Summary</th>
+      <th>Category</th>
+      <th>Experience Required (in years)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_postings.each do |jp| %>
+      <tr>
+        <td><%= jp.title %></td>
+        <td><%= jp.summary %></td>
+        <td><%= jp.job_category %></td>
+        <td><%= jp.experience_required %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
