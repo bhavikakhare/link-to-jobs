@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id               :bigint           not null, primary key
+#  address          :string
+#  avg_rating       :decimal(, )
+#  count_ratings    :integer
+#  description      :text
+#  email            :string
+#  name             :string
+#  phone_number     :integer
+#  size             :string
+#  sum_ratings      :bigint
+#  year_established :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+one:
+  name: Company1
+  year_established: 1997
+  size: small
+  email: company1@email.com
+  phone_number: 12345678
+  avg_rating: 5.0
+  count_ratings: 11
+  sum_ratings: 55
+  address: Arkansas
+  description: We help students with homework.
+
+two:
+  name: Company2
+  year_established: 2003
+  size: big
+  email: company2@email.com
+  phone_number: 23456789
+  avg_rating: 3.5
+  count_ratings: 10
+  sum_ratings: 35
+  address: Missouri
+  description: We offer potted plants for rent
