@@ -5,6 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user1 = User.create!(
+  email: "jill@email.com",
+  password: "password"
+)
+
+user2 = User.create!(
+  email: "bhavika@email.com",
+  password: "password"
+)
+
 JobPosting.create!(
     job_category: 'Media',
     title: 'Video Editor',

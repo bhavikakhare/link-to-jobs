@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  devise_for :users
+  root to: redirect('/job_postings')
+  
   get 'job_postings', to: 'job_postings#index', as: 'job_postings'
   post 'job_postings', to: 'job_postings#create'
   get 'job_postings/new', to: 'job_postings#new', as: 'new_job_posting'
