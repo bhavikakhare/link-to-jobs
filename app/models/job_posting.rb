@@ -12,4 +12,9 @@
 #  updated_at          :datetime         not null
 #
 class JobPosting < ApplicationRecord
+
+    validates :title, presence: true
+    validates :summary, presence: true
+    validates :job_category, presence: true
+    validates :experience_required, presence: true
 end

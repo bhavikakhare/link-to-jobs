@@ -17,4 +17,35 @@ class JobPostingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
+  test "fixtures are valid" do
+    job_postings.each do |jp|
+      assert jp.valid?, jp.errors.full_messages.inspect
+    end
+  end
+
+  test "title must be present" do
+    job_posting = job_postings(:one)
+    job_posting.title = ''
+    assert_not job_posting.valid?
+  end
+
+  test "summary must be present" do
+    job_posting = job_postings(:one)
+    job_posting.summary = ''
+    assert_not job_posting.valid?
+  end
+
+  test "job category must be present" do
+    job_posting = job_postings(:one)
+    job_posting.job_category = ''
+    assert_not job_posting.valid?
+  end
+
+  test "experience required must be present" do
+    job_posting = job_postings(:one)
+    job_posting.experience_required = ''
+    assert_not job_posting.valid?
+  end
+
 end

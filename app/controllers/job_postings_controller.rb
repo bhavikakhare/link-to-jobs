@@ -37,7 +37,6 @@ class JobPostingsController < ApplicationController
         end
     end
 
-
     def destroy
         @job_posting = JobPosting.find(params[:id])
         @job_posting.destroy
