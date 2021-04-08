@@ -5,17 +5,17 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
   </div><br />
 
   <div class="field">
     First Name<br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
   </div><br />
 
   <div class="field">
     Last Name<br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
   </div><br />
 
   <% if @user.is_recruiter == false %>
@@ -33,6 +33,11 @@
     <div class="field">
       Highest Degree<br />
       <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
+    </div><br />
+
+    <div class="field">
+      School of Highest Degree<br />
+      <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
     </div><br />
 
   <% end %>

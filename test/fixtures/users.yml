@@ -9,6 +9,7 @@
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
 #  highest_degree         :string
+#  highest_degree_school  :string
 #  is_recruiter           :boolean
 #  last_name              :string
 #  phone_number           :string

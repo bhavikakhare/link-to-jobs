@@ -42,10 +42,18 @@
   <br />
 
   <div class="field">
-    <%= f.label :is_recruiter %><br />
-    <%= f.check_box :is_recruiter, autofocus: true, autocomplete: "is_recruiter" %>
+  <ul style="list-style-type:none; padding-left: 0">
+    <%= f.collection_radio_buttons(:is_recruiter, [
+      [false, 'Applicant (You will be applying for jobs)'], 
+      [true, 'Recruiter (You work for a company as a recruiter and will be making job postings)']
+      ], :first, :second, { checked: false }) do |b| %>
+      <li>
+      <%= b.radio_button %> <%= b.text %>
+      </li>
+    <% end %>
+  </ul>
   </div>
-
+  
   <br />
 
   <div class="actions">

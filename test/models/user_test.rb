@@ -9,6 +9,7 @@
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
 #  highest_degree         :string
+#  highest_degree_school  :string
 #  is_recruiter           :boolean
 #  last_name              :string
 #  phone_number           :string
@@ -32,6 +33,14 @@ class UserTest < ActiveSupport::TestCase
     users.each do |user|
       assert user.valid?, user.errors.full_messages.inspect
     end  
+  end
+
+  test "email_must_be_valid_and_exist" do
+    user_one = users(:one)
+    user_one.email = nil
+    assert_not user_one.valid?
+    user_one.email = "this is my email"
+    assert_not user_one.valid?
   end
 
   test "first_name_must_exist" do
