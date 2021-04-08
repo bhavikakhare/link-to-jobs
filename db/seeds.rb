@@ -8,12 +8,17 @@
 
 user1 = User.create!(
   email: "jill@email.com",
-  password: "password"
+  password: "password",
+  first_name: "jill",
+  last_name: "jill",
+  is_recruiter: false
 )
 
 user2 = User.create!(
   email: "bhavika@email.com",
-  password: "password"
+  password: "password",
+  first_name: "bhavika",
+  last_name: "bhavika"
 )
 
 JobPosting.create!(
