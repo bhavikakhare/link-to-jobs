@@ -28,8 +28,20 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: 
+  email: test@email.com
+  first_name: Mad
+  last_name: Max
+  is_recruiter: true
+  encrypted_password: password
+
+two: 
+  email: test2@email.com
+  first_name: Mad
+  last_name: Max
+  is_recruiter: true
+  encrypted_password: password
+  highest_degree: 'Doctoral'
 # column: value
 #
-two: {}
 # column: value

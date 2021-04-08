@@ -28,4 +28,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :is_recruiter, inclusion: { in: [true, false], message: "this field should either be true or false"}
+  validates :highest_degree, inclusion: { in: ['Associate',"Bachelor's","Master's","Doctoral"], allow_blank: true}
+
 end
