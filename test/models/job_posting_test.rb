@@ -17,6 +17,7 @@ class JobPostingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+<<<<<<< HEAD
 
   test "fixtures are valid" do
     job_postings.each do |jp|
@@ -49,3 +50,6 @@ class JobPostingTest < ActiveSupport::TestCase
   end
 
 end
+=======
+end
+>>>>>>> 88ed536bb74527eec1c46d2f2a06aba487b5094f
