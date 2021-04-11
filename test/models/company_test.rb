@@ -29,4 +29,72 @@ class CompanyTest < ActiveSupport::TestCase
     end
   end
 
+  test "name is present" do
+    c = companies(:one)
+    c.name = ""
+    assert_not c.valid?
+  end
+
+  test "size is present" do
+    c = companies(:one)
+    c.size = nil
+    assert_not c.valid?
+  end
+
+  test "email is present" do
+    c = companies(:one)
+    c.email = nil
+    assert_not c.valid?
+  end
+
+  test "description is present" do
+    c = companies(:one)
+    c.description = ""
+    assert_not c.valid?
+  end
+
+  test "name is within length limits" do
+    c = companies(:one)
+    c.name = "abc defghijklmnopqrstuvwxyz"
+    assert_not c.valid?
+  end
+
+  test "size is valid" do
+    c = companies(:one)
+    c.size = "xyz"
+    assert_not c.valid?
+  end
+
+  test "email is valid" do
+    c = companies(:one)
+    c.email = "ab c"
+    assert_not c.valid?
+  end
+
+  test "description is within length limits" do
+    c = companies(:one)
+    c.description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula quis urna non sollicitudin. Cras erat quam, interdum volutpat felis eget, volutpat dictum quam. Sed fringilla blandit libero in efficitur. Phasellus vehicula tempus orci, non dictum urna volutpat finibus. Nunc at vehicula orci. Aliquam ut magna tortor. Aenean imperdiet justo et velit lobortis, in pretium ante mattis. Quisque dapibus quam fringilla mollis lobortis. Phasellus pretium nibh non velit hendrerit malesuada sit."
+    assert_not c.valid?
+  end
+
+  # numericality tests left
+
+  test "avg_rating is valid" do
+    c = companies(:one)
+    c.avg_rating = -2
+    assert_not c.valid?
+  end
+
+  test "year_established is valid" do
+    c = companies(:one)
+    c.year_established = 2040
+    assert_not c.valid?
+  end
+
+  test "phone_number is valid" do
+    c = companies(:one)
+    c.phone_number = 10000000000
+    assert_not c.valid?
+  end
+
 end
