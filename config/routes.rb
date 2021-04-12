@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: redirect('/job_postings')
 
   get 'companies/:id', to: 'companies#show', as: 'company'
+  
   get 'job_postings', to: 'job_postings#index', as: 'job_postings'
   post 'job_postings', to: 'job_postings#create'
   get 'job_postings/new', to: 'job_postings#new', as: 'new_job_posting'
