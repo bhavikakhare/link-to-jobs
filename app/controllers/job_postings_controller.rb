@@ -1,4 +1,5 @@
 class JobPostingsController < ApplicationController
+    before_action :authenticate_user!, except: [:index]
 
     def index
         @job_postings = JobPosting.all
@@ -14,17 +15,6 @@ class JobPostingsController < ApplicationController
         @job_posting = JobPosting.new
         render :new
     end
-
-    # def create
-    #     @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required))
-    #     if @job_posting.save
-    #         flash[:success] = "New job posting successfully added!"
-    #         redirect_to job_postings_url
-    #     else
-    #         flash.now[:error] = "Job posting creation failed"
-    #         render :new            
-    #     end
-    # end
 
     def create
         @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required))
