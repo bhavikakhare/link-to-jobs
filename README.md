@@ -2,6 +2,7 @@
 
 ## Contributors
 
-
+-- Jibran Abbasi
 -- Bhavika Khare
 -- Jerica Chambers
+
