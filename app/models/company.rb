@@ -15,8 +15,25 @@
 #  year_established :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  recruiter_id     :bigint
+#
+# Indexes
+#
+#  index_companies_on_recruiter_id  (recruiter_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (recruiter_id => users.id)
 #
 class Company < ApplicationRecord
+
+    belongs_to(
+        :recruiter,
+        class_name: 'User',
+        foreign_key: 'recruiter_id',
+        inverse_of: :companies
+    )
+
     #validations
     # presence validations 
     validates :name, presence: true
@@ -28,7 +45,7 @@ class Company < ApplicationRecord
     # validate rating & sum_ratings ( between count_ratings & count_ratings*5 ) 
     # validate all rating attributes to be non-negative
     # validate phone number digits
-    validates :avg_rating, numericality: { greater_than_or_equal_to: 0.0, less_than_or_equal_to: 5.0 }
+    validates :avg_rating, numericality: { greater_than_or_equal_to: 0.0, less_than_or_equal_to: 5.0, allow_nil: true, }
     validates :count_ratings, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
     validates :phone_number, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 1000000, less_than_or_equal_to: 9999999999 }
     validates :sum_ratings, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }

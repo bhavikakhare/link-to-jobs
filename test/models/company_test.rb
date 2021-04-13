@@ -15,6 +15,15 @@
 #  year_established :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  recruiter_id     :bigint
+#
+# Indexes
+#
+#  index_companies_on_recruiter_id  (recruiter_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (recruiter_id => users.id)
 #
 require "test_helper"
 
