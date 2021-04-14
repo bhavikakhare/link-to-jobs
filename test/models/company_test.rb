@@ -9,7 +9,7 @@
 #  description      :text
 #  email            :string
 #  name             :string
-#  phone_number     :integer
+#  phone_number     :bigint
 #  size             :string
 #  sum_ratings      :bigint
 #  year_established :integer
