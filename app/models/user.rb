@@ -37,6 +37,14 @@ class User < ApplicationRecord
     inverse_of: :recruiter
   )
 
+  has_many(
+    :companies,
+    class_name: 'Company',
+    foreign_key: 'recruiter_id',
+    inverse_of: :recruiter,
+    dependent: :destroy
+  )
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
