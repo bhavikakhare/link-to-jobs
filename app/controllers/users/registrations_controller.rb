@@ -10,20 +10,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
-  def edit
-      super
-  end
+  # def edit
+  #     super
+  # end
 
   # PUT /resource
   def update
-    #params[:tags] = parameters[:tags].keys
-    #params[:tag_list] = params[:tag_list].join(", ")
     super
+    self.resource.tag_list.add(params[:additional_tags], parse: true)
+    self.resource.save
   end
 
   # DELETE /resource
@@ -65,8 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
   
   def user_params
-    params.require(:user).permit(:tag_list => [])
-    
+    params.require(:user).permit(:tag_list => [])    
   end
 
 end
