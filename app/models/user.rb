@@ -36,7 +36,8 @@ class User < ApplicationRecord
   validates :highest_degree, inclusion: { in: ['Associate',"Bachelor's","Master's","Doctoral"], allow_blank: true}
 
   INTEREST_TAGS = ['Fashion Design', 'Fashion Merchandising', 'Graphic Arts', 'Interior Design', 'Web Development',
-  'Accounting', 'Banking', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law']
+  'Finance', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law',
+  'Medicine & Health', 'Digital Marketing','Human Resources']
   acts_as_taggable_on :tags
   
 
