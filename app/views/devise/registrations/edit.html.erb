@@ -1,5 +1,11 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
+
+  
+  <p><% @user.tag_list.each do |tag| %>
+    <p><%= tag %></p>
+  <% end %></p>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -39,6 +45,23 @@
       School of Highest Degree<br />
       <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
     </div><br />
+
+    
+    <div class="field">
+      Add New Tag<br />
+      <%= f.text_field :tag_list %>
+    </div><br />
+
+
+    Interest Tags<br />
+    <div class="field">
+    <%= f.collection_check_boxes(:tag_list, valid_interests, :first, :first) do |b| %>
+      <div class="form-check">
+        <label class="form-check-label"><%= check_box_tag 'user[tag_list][]' %> <%= b.value %></label>
+      </div>
+    <% end %>
+    </div><br /> 
+
 
   <% end %>
 

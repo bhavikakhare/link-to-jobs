@@ -67,3 +67,6 @@ gem "bootstrap_form", "~> 4.0"
 
 # Authentication
 gem 'devise'
+
+# Interest Tags
+gem 'acts-as-taggable-on'

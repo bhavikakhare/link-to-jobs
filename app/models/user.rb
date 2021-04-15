@@ -35,4 +35,8 @@ class User < ApplicationRecord
   validates :is_recruiter, inclusion: { in: [true, false], message: "this field should either be true or false"}
   validates :highest_degree, inclusion: { in: ['Associate',"Bachelor's","Master's","Doctoral"], allow_blank: true}
 
+  INTEREST_TAGS = ['Chocolate', 'Vanilla', 'Strawberry', 'Grapenut', 'Grape']
+  acts_as_taggable_on :tags
+  
+
 end

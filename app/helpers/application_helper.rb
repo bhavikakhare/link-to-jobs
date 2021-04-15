@@ -7,4 +7,8 @@ module ApplicationHelper
           return ''
         end
       end
+
+    def valid_interests
+      User::INTEREST_TAGS.map{ |m| [m] }
+    end
 end
