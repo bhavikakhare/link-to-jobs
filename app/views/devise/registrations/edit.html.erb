@@ -117,24 +117,7 @@
   </div><br /><br />
 <% end %>
 
-<div class="field">
-  <%= check_box_tag "cancel-account" %> Delete My Account
-</div><br />
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<div id="cancel-account-button" style="display:none;">
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-</div>
-
-<script type="text/javascript">
-var checkbox = document.getElementById('cancel-account');
-var details_div = document.getElementById('cancel-account-button');
-checkbox.onchange = function() {
-    if(this.checked) {
-      details_div.style['display'] = 'block';
-    } else {
-      details_div.style['display'] = 'none';
-    }
-};
-</script>
 
 <%= link_to "Back", :back %>
