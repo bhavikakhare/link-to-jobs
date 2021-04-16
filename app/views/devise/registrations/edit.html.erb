@@ -1,87 +1,147 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-  </div><br />
-
-  <div class="field">
-    First Name<br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
-  </div><br />
-
-  <div class="field">
-    Last Name<br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
-  </div><br />
-
-  <% if @user.is_recruiter == false %>
-
-    <div class="field">
-      Phone Number<br />
-      <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
-    </div><br />
-
-    <div class="field">
-      Address<br />
-      <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-    </div><br />
-
-    <div class="field">
-      Highest Degree<br />
-      <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
-    </div><br />
-
-    <div class="field">
-      School of Highest Degree<br />
-      <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
-    </div><br />
-
-  <% end %>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div><br />
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div><br />
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div><br />
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div><br /><br />
-<% end %>
+<h2><%= current_user.first_name %> <%= current_user.last_name %> Profile</h2>
 
 <% if current_user.is_recruiter == true %>
-  <h2>My companies</h2>
-    <table>
-      <% @user.companies.each do |c| %>
-        <tr>
-          <th><%= link_to c.name, company_path(c) %></th>
-        </tr>
-      <% end %>
-    </table>
 
-  <%= link_to "+ NEW company", new_company_path %>
+<h2>My Job Postings</h2>
+
+  <table class="table table-hover">
+
+    <thead class="thead-dark">
+      <tr>
+        <th>Job Title</th>
+        <th>Category</th>
+        <th>Company</th>
+        <th>Applications</th>
+        <th> </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.job_postings.each do |jp| %>
+        <tr>
+          <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+          <td>tag</td>
+          <td><%= jp.company.name %></td>
+          <td>view</td>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%=link_to "+ NEW job posting", new_job_posting_path %>
+  <%=link_to "+ NEW company", new_company_path %>
+
+  <html>
+  <head>
+      <style>
+      {
+          box-sizing: border-box;
+      }
+      /* Set additional styling options for the columns*/
+      .column {
+      float: left;
+      width: 50%;
+      }
+
+      .row:after {
+      content: "";
+      display: table;
+      clear: both;
+      }
+      </style>
+  </head>
+  <body>
+      <div class="row">
+          <div class="column" style="background-color:#FFFFFF;">
+            <h2> Personal Information </h2>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+
+                <div class="field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+                </div><br />
+
+                <div class="field">
+                  First Name<br />
+                  <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
+                </div><br />
+
+                <div class="field">
+                  Last Name<br />
+                  <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
+                </div><br />
+
+                <% if @user.is_recruiter == false %>
+
+                  <div class="field">
+                    Phone Number<br />
+                    <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
+                  </div><br />
+
+                  <div class="field">
+                    Address<br />
+                    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+                  </div><br />
+
+                  <div class="field">
+                    Highest Degree<br />
+                    <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
+                  </div><br />
+
+                  <div class="field">
+                    School of Highest Degree<br />
+                    <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
+                  </div><br />
+
+                <% end %>
+
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                <% end %>
+
+                <div class="field">
+                  <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                  <%= f.password_field :password, autocomplete: "new-password" %>
+                  <% if @minimum_password_length %>
+                    <br />
+                    <em><%= @minimum_password_length %> characters minimum</em>
+                  <% end %>
+                </div><br />
+
+                <div class="field">
+                  <%= f.label :password_confirmation %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div><br />
+
+                <div class="field">
+                  <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                  <%= f.password_field :current_password, autocomplete: "current-password" %>
+                </div><br />
+
+                <div class="actions">
+                  <%= f.submit "Update" %>
+                </div><br /><br />
+              <% end %>
+          </div>
+          <div class="column" style="background-color:#FFFFFF;">
+             <h2>My companies</h2>
+                <table>
+                  <% @user.companies.each do |c| %>
+                    <tr>
+                      <th><%= link_to c.name, company_path(c) %></th>
+                    </tr>
+                    
+                  <% end %>
+                </table>
+          </div>
+      </div>
+  </body>
+  </html>
+
+
 <% end %>
+
+
 
 <h3>Cancel my account</h3>
 
