@@ -25,6 +25,9 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :job_applications, dependent: :destroy
 
   has_many(
     :companies,
@@ -34,8 +37,6 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
@@ -49,5 +50,4 @@ class User < ApplicationRecord
   'Medicine & Health', 'Digital Marketing','Human Resources']
   acts_as_taggable_on :tags
   
-
 end

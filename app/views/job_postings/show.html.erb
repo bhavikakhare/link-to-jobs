@@ -9,3 +9,8 @@
 <p>
   Experience needed: <%= @job_postings.experience_required %> year(s)
 </p>
+
+
+<% if current_user == @job_postings.company.recruiter %>
+  <%= link_to "Delete", job_posting_path(@job_postings), method: :delete %>
+<% end %>
