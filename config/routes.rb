@@ -20,4 +20,18 @@ Rails.application.routes.draw do
   get 'job_postings/:id', to: 'job_postings#show', as: 'job_posting'
   delete 'job_postings/:id', to: 'job_postings#destroy'
 
+  # Index Page (Recruiter)
+  get 'users/:user_id/job_postings/:posting_id/job_applications', to: 'job_applications#index', as: 'job_applications_r'
+  # Index Page (Applicant)
+  get 'users/:user_id/job_applications', to: 'job_applications#index', as: 'job_applications_a'
+  # Create Action (Applicant)
+  post 'job_postings/:id', to: 'job_applications#create'
+  # Show Page (Recruiter)
+  get 'users/:user_id/job_postings/:posting_id/job_applications/:id', to: 'job_applications#show', as: 'job_application_r'
+  # Show Page (Applicant)
+  get 'users/:user_id/job_applications/:id', to: 'job_applications#show', as: 'job_application_a'
+  # Delete Action (Applicant)
+  delete 'users/:user_id/job_applications/:id', to: 'job_applications#destroy'
+  # New Page (Applicant)
+  get 'job_postings/:id/new_job_application', to: 'job_applications#new', as: 'new_job_application'
 end
