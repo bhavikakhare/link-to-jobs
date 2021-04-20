@@ -12,10 +12,10 @@ class JobApplicationsController < ApplicationController
     def require_permission
         if current_user != User.find(params[:user_id])
             redirect_to job_postings_url, flash: { error: "You do not have permission to do that." }
-            return
-        end
-        if current_user != JobPosting.find(params[:posting_id]).company.recruiter
-            redirect_to job_postings_url, flash: { error: "You do not have permission to do that." }
+        elsif params[:posting_id]
+            if current_user != JobPosting.find(params[:posting_id]).company.recruiter
+                redirect_to job_postings_url, flash: { error: "You do not have permission to do that." }
+            end
         end
     end
 
