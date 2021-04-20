@@ -34,12 +34,15 @@
         </thead>
 
         <tbody>
-          <% @user.job_postings.each do |jp| %>
-            <tr>
-              <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-              <td>tag</td>
-              <td><%= jp.company.name %></td>
-              <td>view</td>
+          <% @user.companies.each do |c| %>
+            <% c.job_postings.each do |jp| %>
+                <tr>
+                  <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+                  <td>tag</td>
+                  <td><%= c.name %></td>
+                  <td>view</td>
+                </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
@@ -62,8 +65,6 @@
             </table>
       </div>
     <% end %>
-
-
 
     <div class="row">
       <div class="column" style="background-color:#FFFFFF;">

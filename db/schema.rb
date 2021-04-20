@@ -100,11 +100,9 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
-  add_foreign_key "taggings", "tags"
   add_foreign_key "companies", "users", column: "recruiter_id"
   add_foreign_key "job_applications", "job_postings"
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_postings", "companies"
-
+  add_foreign_key "taggings", "tags"
 end
