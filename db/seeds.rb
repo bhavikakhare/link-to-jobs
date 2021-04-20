@@ -33,7 +33,7 @@ company1 = Company.create(
     description:"We sell over-priced sleek phones that all look the same.",
     address:"@home",
     year_established:1997,
-    recruiter: user2,
+    recruiter: user2
 )
 
 company2 = Company.create(
@@ -47,7 +47,7 @@ company2 = Company.create(
     description:"We sell bouncey rubber balls in bulk.",
     address:"Bouncey Ball Factory in Memphis",
     year_established:1900,
-    recruiter: user2,
+    recruiter: user2
 )
 
 company3 = Company.create(
@@ -61,7 +61,7 @@ company3 = Company.create(
     description:"We sell nice clothes.",
     address:"CK head-quarters in Memphis",
     year_established:2003,
-    recruiter: user2,
+    recruiter: user2
 )
 
 JobPosting.create!(
@@ -70,7 +70,6 @@ JobPosting.create!(
     summary: 'a video editor is needed to animate frames for the company ad campaign',
     experience_required: 1,
     is_closed: false,
-    recruiter: user2,
     company: company1
 )
 
@@ -80,7 +79,6 @@ JobPosting.create!(
     summary: 'a java programmer is needed to test bugs in our software',
     experience_required: 2,
     is_closed: false,
-    recruiter: user2,
     company: company2
 )
 
@@ -90,6 +88,5 @@ JobPosting.create!(
     summary: 'a host is needed to place customers at appropriate tables',
     experience_required: 3,
     is_closed: false,
-    recruiter: user2,
     company: company3
 )

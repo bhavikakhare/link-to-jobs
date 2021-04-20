@@ -49,10 +49,8 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
     t.boolean "is_closed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
     t.bigint "company_id"
     t.index ["company_id"], name: "index_job_postings_on_company_id"
-    t.index ["user_id"], name: "index_job_postings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,5 +77,4 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
   add_foreign_key "job_applications", "job_postings"
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_postings", "companies"
-  add_foreign_key "job_postings", "users"
 end

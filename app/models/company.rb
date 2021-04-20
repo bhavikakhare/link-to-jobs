@@ -30,7 +30,7 @@ class Company < ApplicationRecord
     has_many(
         :job_postings,
         class_name: 'JobPosting',
-        foreign_key: 'job_posting',
+        foreign_key: 'company_id',
         inverse_of: :company,
         dependent: :destroy
     )

@@ -28,14 +28,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :job_applications, dependent: :destroy
-  has_many :job_postings, through: :job_applicationsgit
-
-  has_many(
-    :job_postings,
-    class_name: 'JobPosting',
-    foreign_key: 'user_id',
-    inverse_of: :recruiter
-  )
 
   has_many(
     :companies,
