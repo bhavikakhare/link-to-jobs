@@ -25,6 +25,9 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :job_applications, dependent: :destroy
 
   has_many(
     :companies,
@@ -34,8 +37,6 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
@@ -44,4 +45,9 @@ class User < ApplicationRecord
   validates :is_recruiter, inclusion: { in: [true, false], message: "this field should either be true or false"}
   validates :highest_degree, inclusion: { in: ['Associate',"Bachelor's","Master's","Doctoral"], allow_blank: true}
 
+  INTEREST_TAGS = ['Fashion Design', 'Fashion Merchandising', 'Graphic Arts', 'Interior Design', 'Web Development',
+  'Finance', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law',
+  'Medicine & Health', 'Digital Marketing','Human Resources']
+  acts_as_taggable_on :tags
+  
 end

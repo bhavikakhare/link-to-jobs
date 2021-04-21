@@ -10,6 +10,15 @@
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  company_id          :bigint
+#
+# Indexes
+#
+#  index_job_postings_on_company_id  (company_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (company_id => companies.id)
 #
 
 one:
@@ -18,6 +27,7 @@ one:
   summary: MyString
   experience_required: 1
   is_closed: false
+  company: string
 
 two:
   job_category: MyString
@@ -25,3 +35,4 @@ two:
   summary: MyString
   experience_required: 1
   is_closed: false
+  company: string
