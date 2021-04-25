@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_041452) do
+ActiveRecord::Schema.define(version: 2021_04_21_160219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "company_id"
     t.index ["company_id"], name: "index_job_postings_on_company_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "job_posting_id"
+    t.index ["job_posting_id"], name: "index_questions_on_job_posting_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -104,5 +112,6 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
   add_foreign_key "job_applications", "job_postings"
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_postings", "companies"
+  add_foreign_key "questions", "job_postings"
   add_foreign_key "taggings", "tags"
 end
