@@ -27,7 +27,7 @@ one:
   summary: MyString
   experience_required: 1
   is_closed: false
-  company: string
+  company: one
 
 two:
   job_category: MyString
@@ -35,4 +35,4 @@ two:
   summary: MyString
   experience_required: 1
   is_closed: false
-  company: string
+  company: two
