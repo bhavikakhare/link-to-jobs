@@ -35,6 +35,7 @@ class JobPosting < ApplicationRecord
     validates :summary, presence: true
     validates :experience_required, presence: true
     validates :tag_list, presence: true
+    validates :tag_list, inclusion: User::INTEREST_TAGS.map(&:downcase)
 
     acts_as_taggable_on :tags
 

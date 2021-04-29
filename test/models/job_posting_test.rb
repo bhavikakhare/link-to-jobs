@@ -56,4 +56,10 @@ class JobPostingTest < ActiveSupport::TestCase
     assert_not job_posting.valid?
   end
 
+  test "job category tag must be from approved list in User model" do
+    job_posting = job_postings(:one)
+    job_posting.tag_list = 'Jibran'
+    assert_not job_posting.valid?
+  end
+
 end
