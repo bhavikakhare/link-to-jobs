@@ -89,30 +89,30 @@ company3 = Company.create!(
 )
 
 posting1 = JobPosting.create!(
-    job_category: 'Media',
     title: 'Video Editor',
     summary: 'a video editor is needed to animate frames for the company ad campaign',
     experience_required: 1,
     is_closed: false,
-    company: company1
+    company: company1,
+    tag_list: 'Law'
 )
 
 posting2 = JobPosting.create!(
-    job_category: 'Software',
     title: 'Java Programmer 1',
     summary: 'a java programmer is needed to test bugs in our software',
     experience_required: 2,
     is_closed: false,
-    company: company1
+    company: company1,
+    tag_list: 'Interior Design'
 )
 
 posting3 = JobPosting.create!(
-    job_category: 'Food Service',
     title: 'Host',
     summary: 'a host is needed to place customers at appropriate tables',
     experience_required: 3,
     is_closed: false,
-    company: company3
+    company: company3,
+    tag_list: 'Fashion Design'
 )
 
 posting1.users << [user1, user3]
