@@ -50,4 +50,10 @@ class JobPostingTest < ActiveSupport::TestCase
     assert_not job_posting.valid?
   end
 
+  test "job category tag must be present" do
+    job_posting = job_postings(:one)
+    job_posting.tag_list = ''
+    assert_not job_posting.valid?
+  end
+
 end

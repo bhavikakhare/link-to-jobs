@@ -1,0 +1,9 @@
+tagging_1:
+  taggable: one (JobPosting)
+  context: tags
+  tag: tag_1
+
+tagging_2:
+  taggable: two (JobPosting)
+  context: tags
+  tag: tag_2

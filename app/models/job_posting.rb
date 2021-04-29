@@ -34,6 +34,7 @@ class JobPosting < ApplicationRecord
     validates :title, presence: true
     validates :summary, presence: true
     validates :experience_required, presence: true
+    validates :tag_list, presence: true
 
     acts_as_taggable_on :tags
 
