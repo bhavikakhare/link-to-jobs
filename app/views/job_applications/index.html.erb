@@ -45,7 +45,7 @@
             <% @applications.each do |app| %>
                 <tr>
                     <td><%= link_to app.job_posting.title, job_application_a_path(current_user, app) %></td>
-                    <td><%= app.job_posting.job_category %></td>
+                    <td><%= app.job_posting.tag_list[0].titlecase %></td>
                     <td><%= link_to app.job_posting.company.name, company_path(app.job_posting.company) %></td>
                 </tr>
             <% end %>
