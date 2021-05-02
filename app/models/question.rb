@@ -25,4 +25,6 @@ class Question < ApplicationRecord
         inverse_of: :questions
     )
 
+    validates :question, presence: true
+
 end

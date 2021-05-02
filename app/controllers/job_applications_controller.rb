@@ -35,6 +35,7 @@ class JobApplicationsController < ApplicationController
             @application = @posting.job_applications.find(params[:id])
         else
             @application = current_user.job_applications.find(params[:id])
+            @questions = @application.job_posting.questions
         end
         render :show
     end

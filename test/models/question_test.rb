@@ -23,3 +23,4 @@ class QuestionTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+

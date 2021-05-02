@@ -1,8 +1,5 @@
 class QuestionsController < ApplicationController
-    def new
-        @question = Question.new
-        render :new
-    end
+
 
     def index
         @job_posting = JobPosting.find(params[:id])
