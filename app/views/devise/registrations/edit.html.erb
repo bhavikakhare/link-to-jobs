@@ -1,4 +1,14 @@
 <html>
+  <head>
+    <script>
+      function darkMode() {
+        var element = document.body;
+        var element2 = document.getElementById("table");
+        element.classList.toggle("dark-mode");
+        element2.classList.toggle("table-dark");
+      }
+    </script>  
+  </head>
 
   <body>
     <div id="bootstrap-overrides">
@@ -18,7 +28,7 @@
         <% if user_signed_in? && current_user.is_dark_mode %>
           <table class="table table-dark table-hover table-borderless table-striped">
         <% else %>
-          <table class="table table-hover table-borderless table-striped">
+          <table id="table" class="table table-hover table-borderless table-striped">
         <% end %>
 
           <thead class="thead-dark">
@@ -68,16 +78,11 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>          
 
             <br />
-            <div class="field" style="color: white">                        
-              <%= f.check_box :is_dark_mode, autofocus: true, autocomplete: "is_dark_mode", onclick: "darkMode()" %>
-              Join The <b>Dark Side</b>
+            <div class="field" >                        
+              <%= f.check_box :is_dark_mode, autocomplete: "is_dark_mode", onclick: "darkMode()" %>
+              Join <a style="color: white">The <b>Dark Side</b></a>
             </div><br />
-            <script>
-              function darkMode() {
-                var element = document.body;
-                element.classList.toggle("dark-mode");
-              }
-            </script>
+            
 
             <% if @user.is_recruiter == false %>     
               <div class="float-right">
