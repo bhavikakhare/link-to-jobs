@@ -23,6 +23,6 @@
   -->
 
   <% if current_user == @company.recruiter %>
-    <td><%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %></td>
+    <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %>
   <% end %>
 
