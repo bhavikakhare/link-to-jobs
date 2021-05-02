@@ -9,6 +9,19 @@
         <li class="nav-item <%= active_class(job_postings_path) %>">
           <%= link_to 'Home', job_postings_path, class: 'nav-link' %>
         </li>
+        <% if user_signed_in? && current_user.is_recruiter %>
+          <li class="nav-item <%= active_class(new_company_path) %>">              
+              <%= link_to "Add Company", new_company_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item <%= active_class(new_job_posting_path) %>">
+              <%= link_to "Add Job Posting", new_job_posting_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+        <% if user_signed_in? && !current_user.is_recruiter %>
+          <li class="nav-item <%= active_class(job_applications_a_path(current_user)) %>">              
+              <%= link_to "Job Applications", job_applications_a_path(current_user), class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav">
         <% if user_signed_in? %>

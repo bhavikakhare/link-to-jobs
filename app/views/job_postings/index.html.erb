@@ -1,27 +1,36 @@
-<h1>Job Postings</h1>
 
-<table class="table table-hover">
+<div class="bootstrap-overrides">
+  <h1>Job Postings</h1><br />
 
-  <thead class="thead-dark">
-    <tr>
-      <th>Title</th>
-      <th>Summary</th>
-      <th>Category</th>
-      <th>Experience Required (in years)</th>
-      <th> </th>
-    </tr>
-  </thead>
+  <% if user_signed_in? && current_user.is_dark_mode %>
+    <table class="table table-dark table-hover table-borderless table-striped">
+  <% else %>
+    <table class="table table-hover table-borderless table-striped">
+  <% end %>
 
-  <tbody>
-    <% @job_postings.each do |jp| %>
+    <thead class="thead-dark">
       <tr>
-        <td><%= link_to jp.title, job_posting_path(jp) %></td>
-        <td><%= jp.summary %></td>
-        <td><%= jp.tag_list[0].titleize %></td>
-        <td><%= jp.experience_required %></td>
-        <td>
-        </td>
-    <% end %>
-  </tbody>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Summary</th>
+        <th>Category</th>
+        <th>Experience Required</th>
+        <th> </th>
+      </tr>
+    </thead>
 
-</table>
+    <tbody>
+      <% @job_postings.each do |jp| %>
+        <tr>
+          <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
+          <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
+          <td><%= jp.summary %></td>
+          <td style="white-space: nowrap;"><%= jp.tag_list[0].titleize %></td>
+          <td style="white-space: nowrap;"><%= jp.experience_required %> year(s)</td>
+          <td>
+          </td>
+      <% end %>
+    </tbody>
+
+  </table>
+</div>

@@ -1,0 +1,59 @@
+<head>
+  <style>
+
+    body {
+      font-family: Century Gothic;
+      background-color: white;
+      color: black;    
+      }
+
+      .dark-mode {
+        background-color: black;
+        color: white;
+        font-family: Century Gothic;
+        }
+      .dark-mode textarea, .dark-mode input:not([type=submit]), .dark-mode select{
+        background-color : black; 
+        color: white;
+        border:none;
+        border: 1px solid green;
+        border-radius: 4px;
+        transition: .5s ease all;        
+      }
+      .dark-mode textarea:focus, .dark-mode input:not([type=submit]):focus, .dark-mode select:focus {      
+        border: 1px solid lime;
+        border-radius: 4px;       
+      }
+      .dark-mode textarea:hover, .dark-mode input:not([type=submit]):hover, .dark-mode select:hover {      
+        border: 1px solid lime;
+        border-radius: 4px;       
+      }
+
+    <% if user_signed_in? && current_user.is_dark_mode %>        
+      body {
+        background-color: black;
+        color: white;
+        font-family: Century Gothic;
+        }
+      #bootstrap-overrides textarea, #bootstrap-overrides input:not([type=submit]), #bootstrap-overrides select{
+        background-color : black; 
+        color: white;
+        border:none;
+        border: 1px solid green;
+        border-radius: 4px;
+        transition: .5s ease all;        
+      }
+      #bootstrap-overrides textarea:focus, #bootstrap-overrides input:not([type=submit]):focus, #bootstrap-overrides select:focus {      
+        border: 1px solid lime;
+        border-radius: 4px;       
+      }
+      #bootstrap-overrides textarea:hover, #bootstrap-overrides input:not([type=submit]):hover, #bootstrap-overrides select:hover {      
+        border: 1px solid lime;
+        border-radius: 4px;       
+      }
+      
+    <% end %>
+
+  </style>
+
+</head>
