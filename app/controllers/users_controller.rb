@@ -17,10 +17,8 @@ class UsersController < ApplicationController
 
         if current_user.is_recruiter && @user==current_user
             redirect_to edit_user_registration_url
-        elsif !current_user.is_recruiter && @user==current_user
-            render :show
-        elsif current_user.is_recruiter && @allow_visit == TRUE
-            render :show
+        elsif (current_user.is_recruiter && @allow_visit == TRUE) || (!current_user.is_recruiter && @user==current_user)
+            render :show      
         else
             redirect_to user_profile_path(current_user), flash: { error: "You do not have permission to do that." }
         end
