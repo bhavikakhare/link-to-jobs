@@ -40,16 +40,20 @@
             <td><%= @application.user.highest_degree_school %></td>
         </tr>
 
-        <% @questions.each do |question| %>
-        <tr>
-            <td><%= question.question %></td>
-            <td> answer </td>
-        </tr>
-        <% end %>
-
     </tbody>
 
 </table>
+
+<p>
+    <% @questions.each do |question| %>
+    <tr>
+        <td><b><%= question.question %> : </b></td>
+        <td> answer </td>
+        <br>
+        <br>
+    </tr>
+    <% end %>
+</p>
 
 <p>
     <% if current_user.is_recruiter %>
