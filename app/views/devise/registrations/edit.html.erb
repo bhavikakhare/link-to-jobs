@@ -12,9 +12,12 @@
   <body>
 
     <%= render "devise/shared/error_messages", resource: resource %>
-    <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>
+    <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>    
     <% if !current_user.is_recruiter %>
-      <%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %>
+      <p><%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %></p>
+
+      <%= link_to "Your Profile", user_profile_path(current_user) %>
+
     <% end %>
     <br /><br />
 

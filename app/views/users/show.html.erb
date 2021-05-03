@@ -1,0 +1,37 @@
+<html>
+    <head>
+    
+    </head>
+
+    <body>
+
+        <h1 style="text-align: center;"><b> <%= @user.first_name.capitalize  %> <%= @user.last_name.capitalize %> </b></h1>
+        <h3 style="text-align: center;">Profile</h3>
+        <br /><br /><hr />
+
+        <p><b>Email Address:</b> <%= mail_to @user.email, "#{@user.email}" %></p><hr />
+        <p><b>Contact:</b> <%= @user.phone_number %></p><hr />
+        <p><b>Address:</b> <%= @user.address %></p><hr />
+        <p><b>Education:</b> <%= @user.highest_degree %></p><hr />
+        <p><b>School:</b> <%= @user.highest_degree_school %></p><hr />
+        <% if !@user.is_recruiter %>
+            <p><b>Interests:</b> 
+            <% if @user.tag_list.empty? %>
+                <i>None Selected</i><hr />
+            <% else %>
+                <%= @user.tag_list %><hr />
+            <% end %>
+            </p>
+        <% end %>
+        <% if @user == current_user %>
+            <br />
+            <p><%= link_to "Update Your Profile", edit_user_registration_path %></p>
+        <% end %>
+        <br /><br />
+        <p><%= link_to "Back", :back %></p>
+    
+    </body>
+
+
+</html>
+
