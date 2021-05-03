@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
 
-
     def index
         @job_posting = JobPosting.find(params[:id])
         @questions = @job_posting.questions
@@ -22,7 +21,7 @@ class QuestionsController < ApplicationController
             redirect_to new_jp_question_url(@job_posting)
         else
             flash.now[:error] = "Question could not be saved"
-            render :new
+            redirect_to new_jp_question_url(@job_posting)
         end
     end
 end

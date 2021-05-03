@@ -24,3 +24,14 @@ class QuestionTest < ActiveSupport::TestCase
   # end
 end
 
+test "fixtures are valid" do
+  questions.each do |q|
+    assert q.valid?
+  end
+end
+
+test "question must be present" do
+  question = questions(:one)
+  question.question = ''
+  assert_not question.valid?
+end

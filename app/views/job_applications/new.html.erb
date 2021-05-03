@@ -2,17 +2,23 @@
 <h2 style = 'text-align:center'><%= @posting.company.name %></h2>
 
 <%= bootstrap_form_with model: @application, url: job_posting_path, method: :post, local: true do |f| %>
+    
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :job_posting_id, value: @posting.id %>
+    <%= f.hidden_field :questions, value: @posting.questions%>
     <%= f.text_field :first_name, disabled: :true, value: current_user.first_name %>
     <%= f.text_field :last_name, disabled: :true, value: current_user.last_name %>
     <%= f.text_field :phone_number, disabled: :true, value: current_user.phone_number %>
     <%= f.text_field :email_addres, disabled: :true, value: current_user.email %>
     <%= f.text_field :highest_degree, disabled: :true, value: current_user.highest_degree %>
     <%= f.text_field :highest_degree_school, disabled: :true, value: current_user.highest_degree_school %>
+    <% @question.each do |q| %>
+        <%= f.text_field q.question %>
+    <% end %>
     <%= f.submit %>
 <% end %>
 
 <p>
     <%= link_to 'Back', job_posting_path(@posting) %>
 </p>
+

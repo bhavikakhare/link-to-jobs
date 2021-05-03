@@ -33,6 +33,7 @@ class JobApplicationsController < ApplicationController
         if current_user.is_recruiter
             @posting = JobPosting.find(params[:posting_id])
             @application = @posting.job_applications.find(params[:id])
+            @questions = @application.job_posting.questions
         else
             @application = current_user.job_applications.find(params[:id])
             @questions = @application.job_posting.questions
@@ -43,6 +44,7 @@ class JobApplicationsController < ApplicationController
     def new
         @posting = JobPosting.find(params[:id])
         @application = JobApplication.new
+        @question = @posting.questions
         render :new
     end
 
