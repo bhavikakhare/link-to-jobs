@@ -25,10 +25,9 @@
         <% end %>
         <% if @user == current_user %>
             <br />
-            <p><%= link_to "Update Your Profile", edit_user_registration_path %></p>
+            <%= link_to "Update Profile", edit_user_registration_path, class:"btn btn-success float-left" %>
         <% end %>
-        <br /><br />
-        <p><%= link_to "Back", :back %></p>
+        <div class="float-right"><%= link_to "Back", :back, class:"btn btn-info" %></div>
     
     </body>
 

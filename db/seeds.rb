@@ -14,8 +14,8 @@ user1 = User.create!(
   is_recruiter: false,
   address: '123 Sesame Street',
   highest_degree: 'Bachelor\'s',
-  highest_degree_school: 'CBU',
-  phone_number: '901-555-5555'
+  highest_degree_school: 'UoM',
+  phone_number: '901-323-2392'
 )
 
 user2 = User.create!(
@@ -33,7 +33,7 @@ user3 = User.create!(
   last_name: "Chambers",
   is_recruiter: false,
   address: '123 Sesame Street',
-  highest_degree: 'Bachelor\'s',
+  highest_degree: 'Master\'s',
   highest_degree_school: 'CBU',
   phone_number: '901-555-5555'
 )
@@ -55,7 +55,7 @@ company1 = Company.create!(
     count_ratings:nil,
     size:"small",
     description:"We sell over-priced sleek phones that all look the same.",
-    address:"@home",
+    address:"California, USA",
     year_established:1997,
     recruiter: user2
 )
