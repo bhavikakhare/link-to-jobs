@@ -5,9 +5,8 @@
   <thead class="thead-dark">
     <tr>
       <th>Title</th>
-      <th>Summary</th>
       <th>Category</th>
-      <th>Experience Required (in years)</th>
+      <th>Company</th>
       <th> </th>
     </tr>
   </thead>
@@ -16,9 +15,8 @@
     <% @job_postings.each do |jp| %>
       <tr>
         <td><%= link_to jp.title, job_posting_path(jp) %></td>
-        <td><%= jp.summary %></td>
         <td><%= jp.job_category %></td>
-        <td><%= jp.experience_required %></td>
+        <td><%= link_to jp.company.name, company_path(jp) %></td>
         <td>
         </td>
     <% end %>
