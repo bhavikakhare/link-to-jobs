@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to jp.title, job_posting_path(jp) %></td>
         <td><%= jp.summary %></td>
-        <td><%= jp.job_category %></td>
+        <td><%= jp.tag_list[0].titleize %></td>
         <td><%= jp.experience_required %></td>
         <td>
         </td>
