@@ -1,18 +1,21 @@
 <h1 style="padding: 10px"> Company </h1>
-<%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
 
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.select :size, ['small', 'medium', 'big'] %>
-  <%= f.number_field(:year_established, label: "Year of establishment" ) %>
-  <%= f.text_field :email %>
-  <%= f.number_field :phone_number %>
-  <%= f.text_area :address %>
   <% if current_user == @company.recruiter %>
-    <%= f.submit "update" %>
-  <% end %>
+    <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
 
-<% end %>
+      <%= f.text_field :name %>
+      <%= f.text_area :description %>
+      <%= f.select :size, ['small', 'medium', 'big'] %>
+      <%= f.number_field(:year_established, label: "Year of establishment" ) %>
+      <%= f.text_field :email %>
+      <%= f.number_field :phone_number %>
+      <%= f.text_area :address %>
+
+        <%= f.submit "update" %>
+      <% end %>
+      <br>
+      <td><%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger float-right" %></td>
+  <% end %>
 
 <!--
 <div style="padding: 20px">
@@ -20,6 +23,20 @@
 </div>
 -->
 
-<% if current_user == @company.recruiter %>
-  <td><%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %></td>
+<% if current_user != @company.recruiter %>
+
+  <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
+
+    <%= f.text_field :name, disabled: true %>
+    <%= f.text_area :description, disabled: true %>
+    <%= f.select :size, ['small', 'medium', 'big'], disabled: true %>
+    <%= f.number_field(:year_established, label: "Year of establishment", disabled: true ) %>
+    <%= f.text_field :email, disabled: true %>
+    <%= f.number_field :phone_number, disabled: true %>
+    <%= f.text_area :address, disabled: true %>
+
+  <% end %>
+
 <% end %>
+
+<div class="float-left"><%= link_to "Back", :back, class:"btn btn-warning" %></div>
