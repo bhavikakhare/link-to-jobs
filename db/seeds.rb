@@ -14,8 +14,8 @@ user1 = User.create!(
   is_recruiter: false,
   address: '123 Sesame Street',
   highest_degree: 'Bachelor\'s',
-  highest_degree_school: 'CBU',
-  phone_number: '901-555-5555'
+  highest_degree_school: 'UoM',
+  phone_number: '901-323-2392'
 )
 
 user2 = User.create!(
@@ -33,7 +33,7 @@ user3 = User.create!(
   last_name: "Chambers",
   is_recruiter: false,
   address: '123 Sesame Street',
-  highest_degree: 'Bachelor\'s',
+  highest_degree: 'Master\'s',
   highest_degree_school: 'CBU',
   phone_number: '901-555-5555'
 )
@@ -55,7 +55,7 @@ company1 = Company.create!(
     count_ratings:nil,
     size:"small",
     description:"We sell over-priced sleek phones that all look the same.",
-    address:"@home",
+    address:"California, USA",
     year_established:1997,
     recruiter: user2
 )
@@ -89,30 +89,30 @@ company3 = Company.create!(
 )
 
 posting1 = JobPosting.create!(
-    job_category: 'Media',
     title: 'Video Editor',
     summary: 'a video editor is needed to animate frames for the company ad campaign',
     experience_required: 1,
     is_closed: false,
-    company: company1
+    company: company1,
+    tag_list: 'Law'
 )
 
 posting2 = JobPosting.create!(
-    job_category: 'Software',
     title: 'Java Programmer 1',
     summary: 'a java programmer is needed to test bugs in our software',
     experience_required: 2,
     is_closed: false,
-    company: company1
+    company: company1,
+    tag_list: 'Interior Design'
 )
 
 posting3 = JobPosting.create!(
-    job_category: 'Food Service',
     title: 'Host',
     summary: 'a host is needed to place customers at appropriate tables',
     experience_required: 3,
     is_closed: false,
-    company: company3
+    company: company3,
+    tag_list: 'Fashion Design'
 )
 
 posting1.users << [user1, user3]
