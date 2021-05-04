@@ -1,27 +1,49 @@
-<h1>Job Postings</h1>
+<h1>Job Postings</h1><br />
 
-<table class="table table-hover">
 
-  <thead class="thead-dark">
-    <tr>
-      <th>Title</th>
-      <th>Summary</th>
-      <th>Category</th>
-      <th>Experience Required (in years)</th>
-      <th> </th>
-    </tr>
-  </thead>
+<div class="container-fluid" 
+Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
+    <div class="row">
+        <div class="col-lg-2">
+          <h5 style="text-align: center"><b style="font-weight: 900;">Welcome To Link-to-Jobs!</b></h5>
+          <p>
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+            This is a paragraph.This is a paragraph.This is a paragraph.This is a paragraph.
+          </p>
+          
+        </div>
+        <div class="col-lg-9">
+          <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Category</th>
+                <th>Experience Required (in years)</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @job_postings.each do |jp| %>
+                <tr>
+                  <td><%= link_to jp.title, job_posting_path(jp) %></td>
+                  <td><%= jp.summary %></td>
+                  <td><%= jp.tag_list[0].titleize %></td>
+                  <td><%= jp.experience_required %></td>
+                  <td>
+                  </td>
+              <% end %>
+            </tbody>
+          </table>  
+        
+        </div>
+    </div>
+</div>
 
-  <tbody>
-    <% @job_postings.each do |jp| %>
-      <tr>
-        <td><%= link_to jp.title, job_posting_path(jp) %></td>
-        <td><%= jp.summary %></td>
-        <td><%= jp.tag_list[0].titleize %></td>
-        <td><%= jp.experience_required %></td>
-        <td>
-        </td>
-    <% end %>
-  </tbody>
 
-</table>
+
+  
