@@ -1,6 +1,6 @@
-<h1>Company Name</h1>
+<h1><%= @job_postings.company.name %></h1>
 <h2> <%= @job_postings.title %> </h2>
-<h3> <%= @job_postings.job_category %> </h3>
+<h3> <%= @job_postings.tag_list[0].titlecase %> </h3>
 
 <p>
   Description: <%= @job_postings.summary %>
@@ -10,6 +10,9 @@
   Experience needed: <%= @job_postings.experience_required %> year(s)
 </p>
 
+<% if !current_user.is_recruiter %>
+  <%= link_to 'Apply to this Job', new_job_application_path(@job_postings) %>
+<% end %>
 
 <% if current_user == @job_postings.company.recruiter %>
   <%= link_to "Delete", job_posting_path(@job_postings), method: :delete %>
