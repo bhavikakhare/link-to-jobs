@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_041452) do
+ActiveRecord::Schema.define(version: 2021_04_29_020926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
   end
 
   create_table "job_postings", force: :cascade do |t|
-    t.string "job_category"
     t.string "title"
     t.string "summary"
     t.integer "experience_required"
@@ -100,11 +99,9 @@ ActiveRecord::Schema.define(version: 2021_04_16_041452) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
-  add_foreign_key "taggings", "tags"
   add_foreign_key "companies", "users", column: "recruiter_id"
   add_foreign_key "job_applications", "job_postings"
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_postings", "companies"
-
+  add_foreign_key "taggings", "tags"
 end

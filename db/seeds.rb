@@ -9,20 +9,44 @@
 user1 = User.create!(
   email: "jill@email.com",
   password: "password",
-  first_name: "jill",
-  last_name: "jill",
-  is_recruiter: false
+  first_name: "Jill",
+  last_name: "Johnson",
+  is_recruiter: false,
+  address: '123 Sesame Street',
+  highest_degree: 'Bachelor\'s',
+  highest_degree_school: 'UoM',
+  phone_number: '901-323-2392'
 )
 
 user2 = User.create!(
   email: "bhavika@email.com",
   password: "password",
-  first_name: "bhavika",
-  last_name: "bhavika",
+  first_name: "Bhavika",
+  last_name: "Khare",
   is_recruiter: true
 )
 
-company1 = Company.create(
+user3 = User.create!(
+  email: "jerica@email.com",
+  password: "password",
+  first_name: "Jerica",
+  last_name: "Chambers",
+  is_recruiter: false,
+  address: '123 Sesame Street',
+  highest_degree: 'Master\'s',
+  highest_degree_school: 'CBU',
+  phone_number: '901-555-5555'
+)
+
+user4 = User.create!(
+  email: "jibran@email.com",
+  password: "password",
+  first_name: "Jibran",
+  last_name: "Abbasi",
+  is_recruiter: true
+)
+
+company1 = Company.create!(
     name:"Apple",
     email:"apple@email.com",
     phone_number:11111111,
@@ -31,12 +55,12 @@ company1 = Company.create(
     count_ratings:nil,
     size:"small",
     description:"We sell over-priced sleek phones that all look the same.",
-    address:"@home",
+    address:"California, USA",
     year_established:1997,
     recruiter: user2
 )
 
-company2 = Company.create(
+company2 = Company.create!(
     name:"Ball",
     email:"ball@email.com",
     phone_number:11222211,
@@ -50,7 +74,7 @@ company2 = Company.create(
     recruiter: user2
 )
 
-company3 = Company.create(
+company3 = Company.create!(
     name:"CK",
     email:"ck@email.com",
     phone_number:11233211,
@@ -61,32 +85,36 @@ company3 = Company.create(
     description:"We sell nice clothes.",
     address:"CK head-quarters in Memphis",
     year_established:2003,
-    recruiter: user2
+    recruiter: user4
 )
 
-JobPosting.create!(
-    job_category: 'Media',
+posting1 = JobPosting.create!(
     title: 'Video Editor',
     summary: 'a video editor is needed to animate frames for the company ad campaign',
     experience_required: 1,
     is_closed: false,
-    company: company1
+    company: company1,
+    tag_list: 'Law'
 )
 
-JobPosting.create!(
-    job_category: 'Software',
+posting2 = JobPosting.create!(
     title: 'Java Programmer 1',
     summary: 'a java programmer is needed to test bugs in our software',
     experience_required: 2,
     is_closed: false,
-    company: company2
+    company: company1,
+    tag_list: 'Interior Design'
 )
 
-JobPosting.create!(
-    job_category: 'Food Service',
+posting3 = JobPosting.create!(
     title: 'Host',
     summary: 'a host is needed to place customers at appropriate tables',
     experience_required: 3,
     is_closed: false,
-    company: company3
+    company: company3,
+    tag_list: 'Fashion Design'
 )
+
+posting1.users << [user1, user3]
+posting2.users << [user1]
+posting3.users << [user3]

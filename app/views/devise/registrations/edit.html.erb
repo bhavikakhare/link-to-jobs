@@ -12,7 +12,13 @@
   <body>
 
     <%= render "devise/shared/error_messages", resource: resource %>
-    <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>
+    <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>    
+    <% if !current_user.is_recruiter %>
+      <p><%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %></p>
+
+      <%= link_to "Your Profile", user_profile_path(current_user) %>
+
+    <% end %>
     <br /><br />
 
     <% if current_user.is_recruiter == true %>
@@ -28,18 +34,21 @@
             <th>Job Title</th>
             <th>Category</th>
             <th>Company</th>
-            <th>Applications</th>
+            <th></th>
             <th> </th>
           </tr>
         </thead>
 
         <tbody>
-          <% @user.job_postings.each do |jp| %>
-            <tr>
-              <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-              <td>tag</td>
-              <td><%= jp.company.name %></td>
-              <td>view</td>
+          <% @user.companies.each do |c| %>
+            <% c.job_postings.each do |jp| %>
+                <tr>
+                  <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+                  <td>tag</td>
+                  <td><%= c.name %></td>
+                  <td><%= link_to 'Applications', job_applications_r_path(current_user, jp) %></td>
+                </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
@@ -62,8 +71,6 @@
             </table>
       </div>
     <% end %>
-
-
 
     <div class="row">
       <div class="column" style="background-color:#FFFFFF;">
