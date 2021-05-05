@@ -1,15 +1,15 @@
 
 <div id="bootstrap-overrides">
   <h1>Create New Job Posting</h1>
-
+  
   <%= bootstrap_form_with model: @job_posting, url: job_postings_path, method: :post, local: true do |f| %>
-    
-      <%= f.text_field :title %>
-      <%= f.collection_select :company_id, current_user.companies, :id, :name %>  
-      <%= f.collection_select(:tag_list, valid_interests, :first, :first, :label => "Job Category")  %> 
-      <%= f.text_area :summary %>
-      <%= f.number_field :experience_required, in: 1.0..20.0, step: 0.5, :label => "Experience Required (Years)", :required => true %>
-    
+    <%= f.text_field :title %>
+    <%= f.collection_select :company_id, current_user.companies, :id, :name %>  
+    <%= f.collection_select(:tag_list, valid_interests, :first, :first, :label => "Job Category")  %> 
+    <%= f.text_area :summary %>
+    <%= f.number_field :experience_required, in: 1.0..20.0, step: 0.5, :label => "Experience Required (Years)", :required => true %>
     <%= f.submit %>
   <% end %>
+  <br>
+  <div class="float-left"><%= link_to "Back", :back, class:"btn btn-warning" %></div>
 </div>
