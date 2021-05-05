@@ -5,7 +5,6 @@
 #  id                  :bigint           not null, primary key
 #  experience_required :integer
 #  is_closed           :boolean
-#  job_category        :string
 #  summary             :string
 #  title               :string
 #  created_at          :datetime         not null
@@ -42,7 +41,10 @@ class JobPosting < ApplicationRecord
 
     validates :title, presence: true
     validates :summary, presence: true
-    validates :job_category, presence: true
     validates :experience_required, presence: true
+    validates :tag_list, presence: true
+    validates :tag_list, inclusion: User::INTEREST_TAGS.map(&:downcase)
+
+    acts_as_taggable_on :tags
 
 end

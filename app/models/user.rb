@@ -10,6 +10,7 @@
 #  first_name             :string
 #  highest_degree         :string
 #  highest_degree_school  :string
+#  is_dark_mode           :boolean          default(FALSE)
 #  is_recruiter           :boolean
 #  last_name              :string
 #  phone_number           :string
@@ -47,7 +48,8 @@ class User < ApplicationRecord
 
   INTEREST_TAGS = ['Fashion Design', 'Fashion Merchandising', 'Graphic Arts', 'Interior Design', 'Web Development',
   'Finance', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law',
-  'Medicine & Health', 'Digital Marketing','Human Resources']
+  'Medicine & Health', 'Digital Marketing','Human Resources','App Development','Ethical Hacking','Architecture',
+  'Plumbing','Photography','Career Advising']
   acts_as_taggable_on :tags
   
 end

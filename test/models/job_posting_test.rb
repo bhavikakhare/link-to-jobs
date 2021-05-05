@@ -23,10 +23,6 @@
 require "test_helper"
 
 class JobPostingTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "fixtures are valid" do
     job_postings.each do |jp|
       assert jp.valid?, jp.errors.full_messages.inspect

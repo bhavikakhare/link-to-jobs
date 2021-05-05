@@ -1,27 +1,51 @@
-<h1>Job Postings</h1>
+<div class="bootstrap-overrides">
+  <h1>Job Postings</h1><br />
 
-<table class="table table-hover">
 
-  <thead class="thead-dark">
-    <tr>
-      <th>Title</th>
-      <th>Summary</th>
-      <th>Category</th>
-      <th>Experience Required (in years)</th>
-      <th> </th>
-    </tr>
-  </thead>
+  <div class="container-fluid" 
+  Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
+      <div class="row">
+          <div class="col-lg-2">
+            <h5 style="text-align: center"><b style="font-weight: 900;">Welcome To Link-to-Jobs!</b></h5>
+            <p>
+              Link-To-Jobs is a job-application website that allows recruiters 
+              to post jobs and applicants to apply to these job-postings. Recruiters can setup
+              companies for which they can create job postings. The job postings will be visible here for all to 
+              see and the applicants can apply to jobs based on their interests.<br /><br />
+              So go ahead and sign up as an applicant or recruiter to begin.
+            </p>
 
-  <tbody>
-    <% @job_postings.each do |jp| %>
-      <tr>
-        <td><%= link_to jp.title, job_posting_path(jp) %></td>
-        <td><%= jp.summary %></td>
-        <td><%= jp.job_category %></td>
-        <td><%= jp.experience_required %></td>
-        <td>
-        </td>
-    <% end %>
-  </tbody>
+          </div>
+          <div class="col-lg-9">
+            <% if user_signed_in? && current_user.is_dark_mode %>
+              <table class="table table-dark table-hover table-borderless table-striped">
+            <% else %>
+              <table class="table table-hover table-borderless table-striped">
+            <% end %>
+              <thead class="thead-dark">
+                <tr>
+                  <th>Title</th>
+                  <th>Company</th>
+                  <th>Summary</th>
+                  <th>Category</th>
+                  <th>Experience Required</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @job_postings.each do |jp| %>
+                  <tr>
+                    <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
+                    <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
+                    <td><%= jp.summary %></td>
+                    <td style="white-space: nowrap;"><%= jp.tag_list[0].titleize %></td>
+                    <td style="white-space: nowrap;"><%= jp.experience_required %> year(s)</td>
+                    <td></td>
+                <% end %>
+              </tbody>
+            </table>  
 
-</table>
+          </div>
+      </div>
+  </div>
+</div>
