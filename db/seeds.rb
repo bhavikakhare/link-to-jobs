@@ -132,3 +132,15 @@ question3 = Question.create!(
 posting1.users << [user1, user3]
 posting2.users << [user1]
 posting3.users << [user3]
+
+answer1 - Answer.create!(
+  answer: 'abcdefg'
+)
+
+answer2 - Answer.create!(
+  answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum est vitae aliquam dictum. Etiam bibendum ipsum quis facilisis congue. Maecenas vel convallis urna. Ut non commodo libero. Donec condimentum at ipsum ut cursus. Aliquam gravida, augue vitae rhoncus feugiat, eros massa volutpat massa, at posuere odio ex nec est. Etiam nec arcu facilisis, pulvinar lacus non, dapibus sapien. Proin in luctus nibh, at pharetra urna. Morbi ante eros, lacinia sit amet rhoncus id, malesuada eget eros. Ut nec erat nec est cursus pellentesque. Vivamus malesuada purus faucibus lectus efficitur, eget eleifend nibh mattis. Fusce mattis efficitur risus, ac varius velit venenatis eget. Phasellus est metus, molestie nec malesuada sed, pellentesque sed diam. Proin malesuada non ante sed finibus. Nulla tristique vel enim sit amet tempus. Integer sed nunc ut massa aliquet venenatis.'
+)
+
+answer3 - Answer.create!(
+  answer: '0123456789'
+)

@@ -1,0 +1,15 @@
+# == Schema Information
+#
+# Table name: answers
+#
+#  id         :bigint           not null, primary key
+#  answer     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  answer: Integer vel eleifend nulla. Nunc diam ex, posuere vel feugiat vitae, aliquet ac massa. Sed in ipsum cursus, semper dui a, accumsan nunc. Fusce vestibulum ipsum eget est semper, nec pulvinar turpis cursus. Mauris suscipit, turpis in posuere molestie, mi elit sagittis urna, vel viverra ligula enim nec arcu. Suspendisse tincidunt tellus at accumsan aliquet. Phasellus commodo nisl at nisl ultrices, ac congue ipsum tempor. Fusce rutrum odio nec arcu rutrum, et dictum metus ultricies. Mauris maximus eleifend eros ac dictum.
+
+two:
+  answer: '1111122222333334444455555'
