@@ -112,7 +112,7 @@ posting3 = JobPosting.create!(
     experience_required: 3,
     is_closed: false,
     company: company3,
-    tag_list: 'Fashion Design'
+    tag_list: 'Fashion Design')
 
 question1 = Question.create!(
     question: 'Link to Resume',

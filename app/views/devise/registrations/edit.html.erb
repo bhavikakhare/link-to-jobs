@@ -27,8 +27,8 @@
 
         <% if user_signed_in? && current_user.is_dark_mode %>
           <table class="table table-dark table-hover table-borderless table-striped">
-        <% else %>
-          <table id="table" class="table table-hover table-borderless table-striped">
+          <% else %>
+            <table id="table" class="table table-hover table-borderless table-striped">
         <% end %>
 
         <thead class="thead-dark">
@@ -52,10 +52,10 @@
             <% end %>
           <% end %>
         </tbody>
-      </table>
+        </table>
 
-      <%=link_to "+ NEW job posting", new_job_posting_path %>
-      <%=link_to "+ NEW company", new_company_path %>
+        <%=link_to "+ NEW job posting", new_job_posting_path %>
+        <%=link_to "+ NEW company", new_company_path %>
 
       <% end %>
 
@@ -64,8 +64,8 @@
           <h2>My companies</h2>
             <% if user_signed_in? && current_user.is_dark_mode %>
               <table class="table table-dark table-hover table-borderless table-striped">
-            <% else %>
-              <table id="table" class="table table-hover table-borderless table-striped">
+              <% else %>
+                <table id="table" class="table table-hover table-borderless table-striped">
             <% end %>
                 <tbody>
                   <% @user.companies.each do |c| %>
@@ -74,7 +74,6 @@
                     </tr>
                   <% end %>
                 </tbody>
-            <% end %>
           </table>
         </div>
 
@@ -88,8 +87,8 @@
             <h2>My companies</h2>
               <% if user_signed_in? && current_user.is_dark_mode %>
                 <table class="table table-dark table-hover table-borderless table-striped">
-              <% else %>
-                <table id="table" class="table table-hover table-borderless table-striped">
+                <% else %>
+                  <table id="table" class="table table-hover table-borderless table-striped">
               <% end %>
                 <% @user.companies.each do |c| %>
                   <tr>
