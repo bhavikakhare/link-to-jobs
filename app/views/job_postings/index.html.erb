@@ -1,5 +1,6 @@
 <div class="bootstrap-overrides">
-  <h1>Job Postings</h1><br />
+
+  <h1 style="text-align: center">Job Postings</h1><br />
   
 <div class="container-fluid" 
   Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
@@ -22,10 +23,10 @@
           <% end %>
             <thead class="thead-dark">
               <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Company</th>
-                <th> </th>
+                  <th>Title</th>
+                  <th>Company</th>
+                  <th>Category</th>
+                  <th>Experience Required</th>
               </tr>
             </thead>
             <tbody>
@@ -46,10 +47,10 @@
                 <% if !user_signed_in? || !@interests_only || current_user.tag_list.include?(jp.tag_list[0].downcase) %>
                   <% if params[:search_category].blank? || params[:search_category].to_s.downcase == jp.tag_list[0].to_s %>
                     <tr>
-                      <td><%= link_to jp.title, job_posting_path(jp) %></td>
-                      <td><%= jp.tag_list[0].titleize %></td>
-                      <td><%= link_to jp.company.name %></td>
-                      <td></td>
+                      <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
+                      <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
+                      <td style="white-space: nowrap;"><%= jp.tag_list[0].titleize %></td>
+                      <td style="white-space: nowrap;"><%= jp.experience_required %> year(s)</td>
                     </tr>
                   <% end %>
                 <% end %>

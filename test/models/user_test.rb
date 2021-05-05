@@ -68,5 +68,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not user_one.valid?
   end
 
+  test "user interest tag must be from approved list in User model" do
+    user_one = users(:one)
+    user_one.tag_list = 'Jibran'
+    assert_not user_one.valid?
+  end
+
 end
 
