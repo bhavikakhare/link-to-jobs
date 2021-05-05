@@ -1,48 +1,61 @@
-<h1>Job Postings</h1><br />
-
-
+<div class="bootstrap-overrides">
+  <h1>Job Postings</h1><br />
+  
 <div class="container-fluid" 
-Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
-    <div class="row">
-        <div class="col-lg-2">
-          <h5 style="text-align: center"><b style="font-weight: 900;">Welcome To Link-to-Jobs!</b></h5>
-          <p>
-            Link-To-Jobs is a job-application website that allows recruiters 
-            to post jobs and applicants to apply to these job-postings. Recruiters can setup
-            companies for which they can create job postings. The job postings will be visible here for all to 
-            see and the applicants can apply to jobs based on their interests.<br /><br />
-            So go ahead and sign up as an applicant or recruiter to begin.
-          </p>
-          
+  Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
+        <div class="row">
+          <div class="col-lg-2">
+            <h5 style="text-align: center"><b style="font-weight: 900;">Welcome To Link-to-Jobs!</b></h5>
+            <p>
+              Link-To-Jobs is a job-application website that allows recruiters 
+              to post jobs and applicants to apply to these job-postings. Recruiters can setup
+              companies for which they can create job postings. The job postings will be visible here for all to 
+              see and the applicants can apply to jobs based on their interests.<br /><br />
+              So go ahead and sign up as an applicant or recruiter to begin.
+            </p>
         </div>
         <div class="col-lg-9">
-          <table class="table table-hover">
+          <% if user_signed_in? && current_user.is_dark_mode %>
+              <table class="table table-dark table-hover table-borderless table-striped">
+          <% else %>
+            <table class="table table-hover table-borderless table-striped">
+          <% end %>
             <thead class="thead-dark">
               <tr>
                 <th>Title</th>
-                <th>Summary</th>
                 <th>Category</th>
-                <th>Experience Required (in years)</th>
+                <th>Company</th>
                 <th> </th>
               </tr>
             </thead>
             <tbody>
+               <tr>
+                  <%= form_tag(job_postings_path, method: :get) do %>
+                    <td> <%= text_field_tag(:search_title, params[:search_title]) %> </td>
+                    <td> 
+                      <%= text_field_tag(:search_category, params[:search_category]) %> <br/>
+                      <% if user_signed_in? && !current_user.is_recruiter %> 
+                        <%= check_box_tag(:interests_only, params[:interests_only]) %> See interests only
+                      <% end %>
+                    </td>
+                    <td></td>
+                    <td> <%= submit_tag("search", :class => "btn btn-info") %> </td>
+                  <% end %> 
+               </tr>
               <% @job_postings.each do |jp| %>
-                <tr>
-                  <td><%= link_to jp.title, job_posting_path(jp) %></td>
-                  <td><%= jp.summary %></td>
-                  <td><%= jp.tag_list[0].titleize %></td>
-                  <td><%= jp.experience_required %></td>
-                  <td>
-                  </td>
+                <% if !user_signed_in? || !@interests_only || current_user.tag_list.include?(jp.tag_list[0].downcase) %>
+                  <% if params[:search_category].blank? || params[:search_category].to_s.downcase == jp.tag_list[0].to_s %>
+                    <tr>
+                      <td><%= link_to jp.title, job_posting_path(jp) %></td>
+                      <td><%= jp.tag_list[0].titleize %></td>
+                      <td><%= link_to jp.company.name %></td>
+                      <td></td>
+                    </tr>
+                  <% end %>
+                <% end %>
               <% end %>
             </tbody>
           </table>  
-        
         </div>
     </div>
 </div>
-
-
-
-  
