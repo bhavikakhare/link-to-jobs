@@ -38,7 +38,8 @@
                         <%= check_box_tag(:interests_only, params[:interests_only]) %> See interests only
                       <% end %>
                     </td>
-                    <td> <%= submit_tag ("submit") %> </td>
+                    <td></td>
+                    <td> <%= submit_tag("search", :class => "btn btn-info") %> </td>
                   <% end %> 
                </tr>
               <% @job_postings.each do |jp| %>
