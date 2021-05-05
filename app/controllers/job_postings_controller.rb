@@ -39,8 +39,9 @@ class JobPostingsController < ApplicationController
     def create
         @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required, :company_id, :tag_list))
         if @job_posting.save
+            @question = @job_posting.questions.build(params.permit(:question)) 
             flash[:success] = "New job posting successfully added!"
-            redirect_to job_postings_url
+            redirect_to new_jp_question_path(@job_posting, @question)
         else
             flash.now[:error] = "Job posting creation failed"
             render :new

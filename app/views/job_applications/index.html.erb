@@ -1,58 +1,68 @@
-<% if current_user.is_recruiter %>
-    <!-- Recruiter -->
-    <h1 style = 'text-align:center'><%= @posting.title%></h1>
-    <h2 style = 'text-align:center'><%= @posting.company.name %></h2>
+<div class="bootstrap-overrides">
+    <% if current_user.is_recruiter %>
+        
+        <h1 style = 'text-align:center'><%= @posting.title%></h1>
+        <h2 style = 'text-align:center'><%= @posting.company.name %></h2>
 
-    <table class = 'table'>
+        <% if user_signed_in? && current_user.is_dark_mode %>
+            <table class="table table-dark table-hover table-borderless table-striped">
+        <% else %>
+            <table class="table table-hover table-borderless table-striped">
+        <% end %>
 
-        <thead>
-            <tr>
-                <th>Applicant</th>
-                <th>Date</th>
-                <th>Highest Degree</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <% @applications.each do |app| %>
+            <thead>
                 <tr>
-                    <td><%= app.user.first_name + ' ' + app.user.last_name %></td>
-                    <td><%= app.created_at %></td>
-                    <td><%= app.user.highest_degree %></td>
-                    <td><%= link_to 'Application', job_application_r_path(current_user, app.job_posting, app) %></td>
+                    <th>Applicant</th>
+                    <th>Date</th>
+                    <th>Highest Degree</th>
+                    <th></th>
                 </tr>
+            </thead>
+
+            <tbody>
+                <% @applications.each do |app| %>
+                    <tr>
+                        <td><%= link_to "#{app.user.first_name} #{app.user.last_name}", user_profile_path(app.user) %></td>
+                        <td><%= app.created_at %></td>
+                        <td><%= app.user.highest_degree %></td>
+                        <td><%= link_to 'Application', job_application_r_path(current_user, app.job_posting, app) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+
+        </table>
+
+        <%= link_to 'Back', :back %> 
+    <% else %>
+        
+        <h1 style = 'text-align:center'>Your Active Job Applications</h1>
+        <table class = 'table'>
+
+            <% if user_signed_in? && current_user.is_dark_mode %>
+                <table class="table table-dark table-hover table-borderless table-striped">
+            <% else %>
+                <table class="table table-hover table-borderless table-striped">
             <% end %>
-        </tbody>
-
-    </table>
-
-    <%= link_to 'Back', edit_user_registration_path %> <!-- Recruiter Profile Page -->
-<% else %>
-    <!-- Applicant -->
-    <h1 style = 'text-align:center'>Your Active Job Applications</h1>
-    <table class = 'table'>
-
-        <thead>
-            <tr>
-                <th>Job Title</th>
-                <th>Category</th>
-                <th>Company</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <% @applications.each do |app| %>
                 <tr>
-                    <td><%= link_to app.job_posting.title, job_application_a_path(current_user, app) %></td>
-                    <td><%= app.job_posting.tag_list[0].titlecase %></td>
-                    <td><%= link_to app.job_posting.company.name, company_path(app.job_posting.company) %></td>
+                    <th>Job Title</th>
+                    <th>Category</th>
+                    <th>Company</th>
                 </tr>
-            <% end %>
-        </tbody>
+            </thead>
 
-    </table>
+            <tbody>
+                <% @applications.each do |app| %>
+                    <tr>
+                        <td><%= link_to app.job_posting.title, job_application_a_path(current_user, app) %></td>
+                        <td><%= app.job_posting.tag_list[0].titlecase %></td>
+                        <td><%= link_to app.job_posting.company.name, company_path(app.job_posting.company) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
 
-    <%= link_to 'Back', edit_user_registration_path %> <!-- Applicant Profile Page -->
-<% end %>
+        </table>
 
+        <%= link_to 'Back', :back %> 
+    <% end %>
+
+</div>

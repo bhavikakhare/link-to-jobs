@@ -7,43 +7,43 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user1 = User.create!(
-  email: "jill@email.com",
-  password: "password",
-  first_name: "Jill",
-  last_name: "Johnson",
-  is_recruiter: false,
-  address: '123 Sesame Street',
-  highest_degree: 'Bachelor\'s',
-  highest_degree_school: 'CBU',
-  phone_number: '901-555-5555'
+    email: "jill@email.com",
+    password: "password",
+    first_name: "Jill",
+    last_name: "Johnson",
+    is_recruiter: false,
+    address: '123 Sesame Street',
+    highest_degree: 'Bachelor\'s',
+    highest_degree_school: 'UoM',
+    phone_number: '901-323-2392'
 )
 
 user2 = User.create!(
-  email: "bhavika@email.com",
-  password: "password",
-  first_name: "Bhavika",
-  last_name: "Khare",
-  is_recruiter: true
+    email: "bhavika@email.com",
+    password: "password",
+    first_name: "Bhavika",
+    last_name: "Khare",
+    is_recruiter: true
 )
 
 user3 = User.create!(
-  email: "jerica@email.com",
-  password: "password",
-  first_name: "Jerica",
-  last_name: "Chambers",
-  is_recruiter: false,
-  address: '123 Sesame Street',
-  highest_degree: 'Bachelor\'s',
-  highest_degree_school: 'CBU',
-  phone_number: '901-555-5555'
+    email: "jerica@email.com",
+    password: "password",
+    first_name: "Jerica",
+    last_name: "Chambers",
+    is_recruiter: false,
+    address: '123 Sesame Street',
+    highest_degree: 'Master\'s',
+    highest_degree_school: 'CBU',
+    phone_number: '901-555-5555'
 )
 
 user4 = User.create!(
-  email: "jibran@email.com",
-  password: "password",
-  first_name: "Jibran",
-  last_name: "Abbasi",
-  is_recruiter: true
+    email: "jibran@email.com",
+    password: "password",
+    first_name: "Jibran",
+    last_name: "Abbasi",
+    is_recruiter: true
 )
 
 company1 = Company.create!(
@@ -55,7 +55,7 @@ company1 = Company.create!(
     count_ratings:nil,
     size:"small",
     description:"We sell over-priced sleek phones that all look the same.",
-    address:"@home",
+    address:"California, USA",
     year_established:1997,
     recruiter: user2
 )
@@ -113,7 +113,21 @@ posting3 = JobPosting.create!(
     is_closed: false,
     company: company3,
     tag_list: 'Fashion Design'
+
+question1 = Question.create!(
+    question: 'Link to Resume',
+    job_posting: posting1
 )
+
+question2 = Question.create!(
+    question: 'Work Reference',
+    job_posting: posting1
+)
+
+question3 = Question.create!(
+    question: 'Programming Experience',
+    job_posting: posting2
+ )
 
 posting1.users << [user1, user3]
 posting2.users << [user1]

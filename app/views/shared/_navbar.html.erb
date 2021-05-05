@@ -9,6 +9,19 @@
         <li class="nav-item <%= active_class(job_postings_path) %>">
           <%= link_to 'Home', job_postings_path, class: 'nav-link' %>
         </li>
+        <% if user_signed_in? && current_user.is_recruiter %>
+          <li class="nav-item <%= active_class(new_company_path) %>">              
+              <%= link_to "Add Company", new_company_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item <%= active_class(new_job_posting_path) %>">
+              <%= link_to "Add Job Posting", new_job_posting_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+        <% if user_signed_in? && !current_user.is_recruiter %>
+          <li class="nav-item <%= active_class(job_applications_a_path(current_user)) %>">              
+              <%= link_to "Job Applications", job_applications_a_path(current_user), class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav">
         <% if user_signed_in? %>
@@ -18,10 +31,16 @@
             <% else %>
               <p style= 'color:white' >Applicant</p> 
             <% end %>
-          </li>
-          <li class="nav-item <%= active_class(edit_user_registration_path) %>">
-            <%= link_to "Hi, #{current_user.first_name}", edit_user_registration_path, class: 'nav-link' %>
-          </li>
+          </li>          
+          <% if current_user.is_recruiter %>
+            <li class="nav-item <%= active_class(edit_user_registration_path) %>">
+              <%= link_to "Hi, #{current_user.first_name}", edit_user_registration_path, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item <%= active_class(user_profile_path(current_user)) %>">
+              <%= link_to "Hi, #{current_user.first_name}", user_profile_path(current_user), class: 'nav-link' %>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
           </li>
