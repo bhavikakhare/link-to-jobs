@@ -24,6 +24,8 @@ class JobPosting < ApplicationRecord
     has_many :job_applications, dependent: :destroy
     has_many :users, through: :job_applications
 
+ 
+
     belongs_to(
         :company,
         class_name: 'Company',

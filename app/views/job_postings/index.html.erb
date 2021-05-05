@@ -15,19 +15,30 @@
   <tbody>
     <tr>
       <%= form_tag(job_postings_path, method: :get) do %>
-        <td> <%= text_field_tag(:search, params[:search]) %> </td>
-        <td></td><td></td>
+        <td> <%= text_field_tag(:search_title, params[:search_title]) %> </td>
+        <td></td>
+        <td> 
+          <%= text_field_tag(:search_category, params[:search_category]) %> <br/>
+          <% if current_user && !current_user.is_recruiter %> 
+            <%= check_box_tag(:interests_only, params[:interests_only]) %> See interests only
+          <% end %>
+        </td>
         <td> <%= submit_tag ("submit") %> </td>
       <% end %> 
     </tr>
     <% @job_postings.each do |jp| %>
-      <tr>
-        <td><%= link_to jp.title, job_posting_path(jp) %></td>
-        <td><%= jp.summary %></td>
-        <td><%= jp.tag_list[0].titleize %></td>
-        <td><%= jp.experience_required %></td>
-        <td>
-        </td>
+      <% if !current_user || !@interests_only || current_user.tag_list.include?(jp.tag_list[0].downcase) %>
+        <% if params[:search_category].blank? || params[:search_category].to_s.downcase == jp.tag_list[0].to_s %>
+          <tr>
+            <td><%= link_to jp.title, job_posting_path(jp) %></td>
+            <td><%= jp.summary %></td>
+            <td><%= jp.tag_list[0].titleize %></td>
+            <td><%= jp.experience_required %></td>
+            <td>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 
