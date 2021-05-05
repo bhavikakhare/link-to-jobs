@@ -7,7 +7,20 @@
         element.classList.toggle("dark-mode");
         element2.classList.toggle("table-dark");
       }
-    </script>  
+    </script>
+
+    <script type="text/javascript">
+      var checkbox = document.getElementById('change-password');
+      var details_div = document.getElementById('new-password');
+      checkbox.onchange = function() {
+        if(this.checked) {
+          details_div.style['display'] = 'block';
+        } else {
+          details_div.style['display'] = 'none';
+        }
+      };
+    </script>
+
   </head>
 
   <body>
@@ -19,8 +32,7 @@
       <% end %>
       <br /><br />
 
-      <% if current_user.is_recruiter == true %>
-
+      <% if current_user.is_recruiter == true && (@user.companies.map{|x| x.job_postings.count}).sum > 0 %>
         <h2>
           My Job Postings
         </h2>
@@ -60,7 +72,7 @@
         <br /><br />
       <% end %>
 
-      <% if @user.is_recruiter == true %>
+      <% if @user.is_recruiter == true && @user.companies.count > 0 %>
         <div class="column float-right" >
           <h2>My Companies</h2>
             <% if user_signed_in? && current_user.is_dark_mode %>
@@ -74,6 +86,7 @@
                   <th>Year</th>
                   <th>Email</th>
                   <th>Job Postings</th>
+                  <th>Job Applications</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,6 +96,7 @@
                     <td><%= c.year_established %></td>
                     <td><%= c.email %></td>
                     <td style="text-align: center"><%= c.job_postings.count %></td>
+                    <td style="text-align: center"><%= (c.job_postings.map{|x| x.job_applications.count}).sum %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -192,18 +206,6 @@
               </div><br />
 
             </div>
-
-            <script type="text/javascript">
-              var checkbox = document.getElementById('change-password');
-              var details_div = document.getElementById('new-password');
-              checkbox.onchange = function() {
-                if(this.checked) {
-                  details_div.style['display'] = 'block';
-                } else {
-                  details_div.style['display'] = 'none';
-                }
-              };
-            </script>
 
             <div class="actions">
               <%= f.submit "Update", class: 'btn btn-secondary btn-success' %>

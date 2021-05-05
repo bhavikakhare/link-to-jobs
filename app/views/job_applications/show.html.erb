@@ -42,21 +42,22 @@
         </tbody>
     </table>
     <br />
-    <h3> Questions</h3>
-    <p>
-        <table>
-            <tbody>
-                <% @questions.each do |question| %>
-                    <tr>
-                        <td><b><%= question.question %> </b></td>
-                    </tr>
-                    <tr><td><i> some answer </i></td></tr>
-                    <tr><td style="color: transparent">Testing this empty row</td></tr>
-                <% end %>
-            </tbody>
-        </table>
-        
-    </p>
+    <% if @questions.count > 0 %>
+        <h3> Questions</h3>
+        <p>
+            <table>
+                <tbody>
+                    <% @questions.each do |question| %>
+                        <tr>
+                            <td><b><%= question.question %> </b></td>
+                        </tr>
+                        <tr><td><i> some answer </i></td></tr>
+                        <tr><td style="color: transparent">Testing this empty row</td></tr>
+                    <% end %>
+                </tbody>
+            </table>            
+        </p>
+    <% end %>
     
     <br /><br />
     <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
