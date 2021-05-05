@@ -130,6 +130,13 @@ question3 = Question.create!(
     job_posting: posting2
  )
 
+review1 = Review.create!(
+    rating_5: 1,
+    review_text: 'This company sucks',
+    company: company1,
+    applicant: user1
+)
+
 posting1.users << [user1, user3]
 posting2.users << [user1]
 posting3.users << [user3]

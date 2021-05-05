@@ -42,6 +42,14 @@ class Company < ApplicationRecord
         inverse_of: :companies
     )
 
+    has_many(
+        :reviews,
+        class_name: 'Review',
+        foreign_key: 'company_id',
+        inverse_of: :company,
+        dependent: :destroy
+    )
+
     #validations
     # presence validations 
     validates :name, presence: true

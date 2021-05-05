@@ -15,6 +15,37 @@
     <% end %>
 
   <% end %>
+  <br />
+  <hr style = 'border-width: 5px; background-color:#000000' />
+  <% if !current_user.is_recruiter %>
+    <h3>What do you think about <%= @company.name %>?  Let us know by adding a review</h3>
+    <%= bootstrap_form_with model: @review, url: company_path(@company), method: :post, local: true do |f| %>
+      <%= f.select :rating_5, ['1', '2', '3', '4', '5'], label: 'Rating' %>
+      <%= f.text_area :review_text, label: 'Review' %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :company_id, value: @company.id %>
+      <%= f.submit 'Add Review' %>
+    <% end %>
+  <br />
+  <% end %>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @company.reviews.each do |review| %>
+        <tr>
+          <td><%= review.rating_5 %></td>
+          <td><%= review.review_text %></td>
+          <td><%= review.applicant.first_name + ' ' + review.applicant.last_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <!--
   <div style="padding: 20px">
