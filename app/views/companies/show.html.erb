@@ -4,7 +4,7 @@
     <div id='bootstrap-overrides'>
       <%= f.text_field :name, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :description, :disabled => !current_user.is_recruiter? %>
-      <%= f.select :size, ['small', 'medium', 'big'], :disabled => !current_user.is_recruiter? %>
+      <%= f.select :size, ['small', 'medium', 'big'], {}, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field(:year_established, label: "Year of establishment", :disabled => !current_user.is_recruiter? ) %>
       <%= f.text_field :email, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
@@ -23,6 +23,8 @@
   -->
 
   <% if current_user == @company.recruiter %>
-    <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %>
+    <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger float-left" %>
   <% end %>
+
+  <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
 

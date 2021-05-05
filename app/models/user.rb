@@ -51,5 +51,7 @@ class User < ApplicationRecord
   'Medicine & Health', 'Digital Marketing','Human Resources','App Development','Ethical Hacking','Architecture',
   'Plumbing','Photography','Career Advising', 'Computer Science', 'Business', 'Music']
   acts_as_taggable_on :tags
+
+  validates :tag_list, inclusion: User::INTEREST_TAGS.map(&:downcase)
   
 end
