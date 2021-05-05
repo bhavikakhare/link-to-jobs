@@ -15,16 +15,14 @@ user1 = User.create!(
     address: '123 Sesame Street',
     highest_degree: 'Bachelor\'s',
     highest_degree_school: 'UoM',
-    phone_number: '901-323-2392'
-)
+    phone_number: '901-323-2392')
 
 user2 = User.create!(
     email: "bhavika@email.com",
     password: "password",
     first_name: "Bhavika",
     last_name: "Khare",
-    is_recruiter: true
-)
+    is_recruiter: true)
 
 user3 = User.create!(
     email: "jerica@email.com",
@@ -35,16 +33,14 @@ user3 = User.create!(
     address: '123 Sesame Street',
     highest_degree: 'Master\'s',
     highest_degree_school: 'CBU',
-    phone_number: '901-555-5555'
-)
+    phone_number: '901-555-5555')
 
 user4 = User.create!(
     email: "jibran@email.com",
     password: "password",
     first_name: "Jibran",
     last_name: "Abbasi",
-    is_recruiter: true
-)
+    is_recruiter: true)
 
 company1 = Company.create!(
     name:"Apple",
@@ -57,8 +53,7 @@ company1 = Company.create!(
     description:"We sell over-priced sleek phones that all look the same.",
     address:"California, USA",
     year_established:1997,
-    recruiter: user2
-)
+    recruiter: user2)
 
 company2 = Company.create!(
     name:"Ball",
@@ -71,8 +66,7 @@ company2 = Company.create!(
     description:"We sell bouncey rubber balls in bulk.",
     address:"Bouncey Ball Factory in Memphis",
     year_established:1900,
-    recruiter: user2
-)
+    recruiter: user2)
 
 company3 = Company.create!(
     name:"Calvin Klein",
@@ -85,8 +79,7 @@ company3 = Company.create!(
     description:"We sell nice clothes.",
     address:"CK head-quarters in Memphis",
     year_established:2003,
-    recruiter: user4
-)
+    recruiter: user4)
 
 posting1 = JobPosting.create!(
     title: 'Video Editor',
@@ -94,8 +87,7 @@ posting1 = JobPosting.create!(
     experience_required: 1,
     is_closed: false,
     company: company1,
-    tag_list: 'Law'
-)
+    tag_list: 'Law')
 
 posting2 = JobPosting.create!(
     title: 'Java Programmer 1',
@@ -103,8 +95,7 @@ posting2 = JobPosting.create!(
     experience_required: 2,
     is_closed: false,
     company: company1,
-    tag_list: 'Interior Design'
-)
+    tag_list: 'Interior Design')
 
 posting3 = JobPosting.create!(
     title: 'Host',
@@ -204,18 +195,15 @@ posting14 = JobPosting.create!(
 
 question1 = Question.create!(
     question: 'Link to Resume',
-    job_posting: posting1
-)
+    job_posting: posting1)
 
 question2 = Question.create!(
     question: 'Work Reference',
-    job_posting: posting1
-)
+    job_posting: posting1)
 
 question3 = Question.create!(
     question: 'Programming Experience',
-    job_posting: posting2
- )
+    job_posting: posting2 )
 
 posting1.users << [user1, user3]
 posting2.users << [user1]

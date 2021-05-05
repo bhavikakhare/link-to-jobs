@@ -1,10 +1,10 @@
 <div class="bootstrap-overrides">
+
   <h1 style="text-align: center">Job Postings</h1><br />
-
-
-  <div class="container-fluid" 
-  Style="width: 87vw; margin-left: calc(-42.5vw + 50%); padding-right: 0;">    
-      <div class="row">
+  
+<div class="container-fluid" 
+  Style="width: 87vw; margin-left: calc(-45.5vw + 50%); padding-right: 0;">    
+        <div class="row">
           <div class="col-lg-2">
             <h5 style="text-align: center"><b style="font-weight: 900;">Welcome To Link-to-Jobs!</b></h5>
             <p>
@@ -14,34 +14,49 @@
               see and the applicants can apply to jobs based on their interests.<br /><br />
               So go ahead and sign up as an applicant or recruiter to begin.
             </p>
-
-          </div>
-          <div class="col-lg-6">
-            <% if user_signed_in? && current_user.is_dark_mode %>
+        </div>
+        <div class="col-lg-9">
+          <% if user_signed_in? && current_user.is_dark_mode %>
               <table class="table table-dark table-hover table-borderless table-striped">
-            <% else %>
-              <table class="table table-hover table-borderless table-striped">
-            <% end %>
-              <thead class="thead-dark">
-                <tr>
+          <% else %>
+            <table class="table table-hover table-borderless table-striped">
+          <% end %>
+            <thead class="thead-dark">
+              <tr>
                   <th>Title</th>
                   <th>Company</th>
                   <th>Category</th>
                   <th>Experience Required</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @job_postings.each do |jp| %>
-                  <tr>
-                    <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
-                    <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
-                    <td style="white-space: nowrap;"><%= jp.tag_list[0].titleize %></td>
-                    <td style="white-space: nowrap;"><%= jp.experience_required %> year(s)</td>
+              </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <%= form_tag(job_postings_path, method: :get) do %>
+                    <td> <%= text_field_tag(:search_title, params[:search_title]) %> </td>
+                    <td> 
+                      <%= text_field_tag(:search_category, params[:search_category]) %> <br/>
+                      <% if user_signed_in? && !current_user.is_recruiter %> 
+                        <%= check_box_tag(:interests_only, params[:interests_only]) %> See interests only
+                      <% end %>
+                    </td>
+                    <td></td>
+                    <td> <%= submit_tag("search", :class => "btn btn-info") %> </td>
+                  <% end %> 
+               </tr>
+              <% @job_postings.each do |jp| %>
+                <% if !user_signed_in? || !@interests_only || current_user.tag_list.include?(jp.tag_list[0].downcase) %>
+                  <% if params[:search_category].blank? || params[:search_category].to_s.downcase == jp.tag_list[0].to_s %>
+                    <tr>
+                      <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
+                      <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
+                      <td style="white-space: nowrap;"><%= jp.tag_list[0].titleize %></td>
+                      <td style="white-space: nowrap;"><%= jp.experience_required %> year(s)</td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              </tbody>
-            </table>  
-
-          </div>
-      </div>
-  </div>
+              <% end %>
+            </tbody>
+          </table>  
+        </div>
+    </div>
 </div>
