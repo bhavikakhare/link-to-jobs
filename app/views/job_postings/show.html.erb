@@ -18,5 +18,13 @@
     <%= link_to "Delete Job Posting", job_posting_path(@job_postings), method: :delete, 
     data: { confirm: "Are you sure?
   You will loose all job applications for this posting." } %>
+  
+    <%= bootstrap_form_with model: @job_posting, url: job_postings_path, method: :post, local: true do |f| %>
+      <%= f.hidden_field :is_closed, value: true %>
+      <%= f.submit "Close Job Posting"%>
+    <% end %>
+  
   <% end %>
+
+
 </div>
