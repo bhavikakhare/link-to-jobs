@@ -75,7 +75,7 @@ company2 = Company.create!(
 )
 
 company3 = Company.create!(
-    name:"CK",
+    name:"Calvin Klein",
     email:"ck@email.com",
     phone_number:11233211,
     avg_rating:3.5,
@@ -113,6 +113,94 @@ posting3 = JobPosting.create!(
     is_closed: false,
     company: company3,
     tag_list: 'Fashion Design')
+
+posting4 = JobPosting.create!(
+    title: 'Jr. Software Developer',
+    summary: 'a software developer is need to build web apps in Ruby on Rails',
+    experience_required: 1,
+    is_closed: false,
+    company: company1,
+    tag_list: 'Computer Science')
+    
+posting5 = JobPosting.create!(
+    title: 'Video Editor',
+    summary: 'Video Editor required to edit heavy metal music videos',
+    experience_required: 7,
+    is_closed: false,
+    company: company2,
+    tag_list: 'Film/Video')
+    
+posting6 = JobPosting.create!(
+    title: 'Kitchen Worker',
+    summary: 'Expeirience worker required to organize food on plates in fine dining restaurant',
+    experience_required: 2,
+    is_closed: false,
+    company: company3,
+    tag_list: 'Food Industry')
+    
+posting7 = JobPosting.create!(
+    title: 'Accountant',
+    summary: 'Experienced accountant required for preparing tax returns',
+    experience_required: 4,
+    is_closed: false,
+    company: company1,
+    tag_list: 'Business')
+    
+posting8 = JobPosting.create!(
+    title: 'Data Analyst',
+    summary: 'Recent graduate in computer science required for data analytics',
+    experience_required: 1,
+    is_closed: false,
+    company: company2,
+    tag_list: 'Business')
+
+posting9 = JobPosting.create!(
+    title: 'Minister of Music',
+    summary: 'Need a Minister of Music to coordinate, rehearse, and direct all choirs of our church',
+    experience_required: 3,
+    is_closed: false,
+    company: company3,
+    tag_list: 'Music')
+
+posting10 = JobPosting.create!(
+    title: 'Firefighter',
+    summary: 'Setting up a new fire department and need someone to lead the team',
+    experience_required: 6,
+    is_closed: false,
+    company: company1,
+    tag_list: 'Public Service')
+    
+posting11 = JobPosting.create!(
+    title: 'Police Officer',
+    summary: 'Need to hire a police officer as a security consultant',
+    experience_required: 2,
+    is_closed: false,
+    company: company2,
+    tag_list: 'Public Service')
+
+posting12 = JobPosting.create!(
+    title: 'Cashier',
+    summary: 'A quick and honest cashier required who can work night shifts',
+    experience_required: 1,
+    is_closed: false,
+    company: company3,
+    tag_list: 'Computer Science')
+
+posting13 = JobPosting.create!(
+    title: 'IT Technician',
+    summary: 'Need a technician to manage IT infrastructure',
+    experience_required: 2,
+    is_closed: false,
+    company: company1,
+    tag_list: 'Computer Science')
+    
+posting14 = JobPosting.create!(
+    title: 'Office Manager',
+    summary: 'Manager required to manage a team of administrative or support staff',
+    experience_required: 8,
+    is_closed: false,
+    company: company2,
+    tag_list: 'Business')
 
 question1 = Question.create!(
     question: 'Link to Resume',

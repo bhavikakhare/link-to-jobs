@@ -49,7 +49,7 @@ class User < ApplicationRecord
   INTEREST_TAGS = ['Fashion Design', 'Fashion Merchandising', 'Graphic Arts', 'Interior Design', 'Web Development',
   'Finance', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law',
   'Medicine & Health', 'Digital Marketing','Human Resources','App Development','Ethical Hacking','Architecture',
-  'Plumbing','Photography','Career Advising']
+  'Plumbing','Photography','Career Advising', 'Computer Science', 'Business', 'Music']
   acts_as_taggable_on :tags
   
 end
