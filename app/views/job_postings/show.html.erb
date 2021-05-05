@@ -19,10 +19,7 @@
     data: { confirm: "Are you sure?
   You will loose all job applications for this posting." } %>
   
-    <%= bootstrap_form_with model: @job_posting, url: job_postings_path, method: :post, local: true do |f| %>
-      <%= f.hidden_field :is_closed, value: true %>
-      <%= f.submit "Close Job Posting"%>
-    <% end %>
+    <%= button_to "Close Job Posting", is_closed_path %>
   
   <% end %>
 

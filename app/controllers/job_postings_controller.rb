@@ -37,7 +37,7 @@ class JobPostingsController < ApplicationController
     end
 
     def create
-        @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required, :company_id, :tag_list))
+        @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required, :company_id, :tag_list, :is_closed))
         if @job_posting.save
             @question = @job_posting.questions.build(params.permit(:question)) 
             flash[:success] = "New job posting successfully added!"
@@ -54,6 +54,12 @@ class JobPostingsController < ApplicationController
         flash[:success] = "The job posting was successfully destroyed."
         redirect_to job_postings_url
 
+    end
+
+    def is_closed
+      @job_posting = JobPosting.find(params[:id])
+      @job_posting.update(is_closed: true)
+      redirect_to job_postings_url
     end
 
 
