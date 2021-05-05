@@ -1,6 +1,6 @@
 <div class="bootstrap-overrides">
     <% if current_user.is_recruiter %>
-        <!-- Recruiter -->
+        
         <h1 style = 'text-align:center'><%= @posting.title%></h1>
         <h2 style = 'text-align:center'><%= @posting.company.name %></h2>
 
@@ -22,7 +22,7 @@
             <tbody>
                 <% @applications.each do |app| %>
                     <tr>
-                        <td><%= app.user.first_name + ' ' + app.user.last_name %></td>
+                        <td><%= link_to "#{app.user.first_name} #{app.user.last_name}", user_profile_path(app.user) %></td>
                         <td><%= app.created_at %></td>
                         <td><%= app.user.highest_degree %></td>
                         <td><%= link_to 'Application', job_application_r_path(current_user, app.job_posting, app) %></td>
@@ -32,9 +32,9 @@
 
         </table>
 
-        <%= link_to 'Back', edit_user_registration_path %> <!-- Recruiter Profile Page -->
+        <%= link_to 'Back', :back %> 
     <% else %>
-        <!-- Applicant -->
+        
         <h1 style = 'text-align:center'>Your Active Job Applications</h1>
         <table class = 'table'>
 
@@ -62,7 +62,7 @@
 
         </table>
 
-        <%= link_to 'Back', edit_user_registration_path %> <!-- Applicant Profile Page -->
+        <%= link_to 'Back', :back %> 
     <% end %>
 
 </div>

@@ -31,28 +31,52 @@
           <table id="table" class="table table-hover table-borderless table-striped">
         <% end %>
 
-          <thead class="thead-dark">
-            <tr>
-              <th>Job Title</th>
-              <th>Category</th>
-              <th>Company</th>
-              <th></th>
-            </tr>
-          </thead>
+        <thead class="thead-dark">
+          <tr>
+            <th>Job Title</th>
+            <th>Category</th>
+            <th>Company</th>
+            <th></th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <% @user.companies.each do |c| %>
-              <% c.job_postings.each do |jp| %>
-                  <tr>
-                    <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-                    <td><%= jp.tag_list[0].titleize %></td>
-                    <td><%= c.name %></td>
-                    <td><%= link_to 'Applications', job_applications_r_path(current_user, jp) %></td>
-                  </tr>
-              <% end %>
+        <tbody>
+          <% @user.companies.each do |c| %>
+            <% c.job_postings.each do |jp| %>
+                <tr>
+                  <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+                  <td><%= jp.tag_list[0].titleize %></td>
+                  <td><%= c.name %></td>
+                  <td><%= link_to 'Applications', job_applications_r_path(current_user, jp) %></td>
+                </tr>
             <% end %>
-          </tbody>
-        </table>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%=link_to "+ NEW job posting", new_job_posting_path %>
+      <%=link_to "+ NEW company", new_company_path %>
+
+      <% end %>
+
+      <% if @user.is_recruiter == true %>
+        <div class="column float:right" >
+          <h2>My companies</h2>
+            <% if user_signed_in? && current_user.is_dark_mode %>
+              <table class="table table-dark table-hover table-borderless table-striped">
+            <% else %>
+              <table id="table" class="table table-hover table-borderless table-striped">
+            <% end %>
+                <tbody>
+                  <% @user.companies.each do |c| %>
+                    <tr>
+                      <th><%= link_to c.name, company_path(c) %></th>
+                    </tr>
+                  <% end %>
+                </tbody>
+            <% end %>
+          </table>
+        </div>
 
         <%=link_to "+ NEW job posting", new_job_posting_path %>
         <%=link_to "+ NEW company", new_company_path %>
@@ -62,12 +86,15 @@
       <% if @user.is_recruiter == true %>
         <div class="column" style="float:right">
             <h2>My companies</h2>
-              <table>
+              <% if user_signed_in? && current_user.is_dark_mode %>
+                <table class="table table-dark table-hover table-borderless table-striped">
+              <% else %>
+                <table id="table" class="table table-hover table-borderless table-striped">
+              <% end %>
                 <% @user.companies.each do |c| %>
                   <tr>
                     <th><%= link_to c.name, company_path(c) %></th>
-                  </tr>
-                  
+                  </tr>                  
                 <% end %>
               </table>
         </div>
@@ -136,7 +163,7 @@
 
               <div class="field">
                 School of Highest Degree<br />
-                <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
+                <%= f.text_field :highest_degree_school, autofocus: true, autocomplete: "highest_degree_school" %>
               </div><br />
 
             <% end %>
