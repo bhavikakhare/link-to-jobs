@@ -24,6 +24,14 @@ class JobPosting < ApplicationRecord
     has_many :job_applications, dependent: :destroy
     has_many :users, through: :job_applications
 
+    has_many(
+        :questions,
+        class_name: 'Question',
+        foreign_key: 'job_posting_id',
+        inverse_of: :job_posting,
+        dependent: :destroy
+    )
+    
     belongs_to(
         :company,
         class_name: 'Company',

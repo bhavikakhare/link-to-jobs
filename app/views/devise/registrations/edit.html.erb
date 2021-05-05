@@ -1,33 +1,35 @@
 <html>
-    <head>
-      <style>
-      {box-sizing: border-box;}
-
-      .column {float: left;width: 50%;}
-
-      .row:after {content: "";display: table;clear: both;}
-      </style>
+  <head>
+    <script>
+      function darkMode() {
+        var element = document.body;
+        var element2 = document.getElementById("table");
+        element.classList.toggle("dark-mode");
+        element2.classList.toggle("table-dark");
+      }
+    </script>  
   </head>
 
   <body>
+    <div id="bootstrap-overrides">
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>
+      <% if !current_user.is_recruiter %>
+        <%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %>
+      <% end %>
+      <br /><br />
 
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>    
-    <% if !current_user.is_recruiter %>
-      <p><%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %></p>
+      <% if current_user.is_recruiter == true %>
 
-      <%= link_to "Your Profile", user_profile_path(current_user) %>
+        <h2>
+          My Job Postings
+        </h2>
 
-    <% end %>
-    <br /><br />
-
-    <% if current_user.is_recruiter == true %>
-
-      <h2>
-        My Job Postings
-      </h2>
-
-      <table class="table table-hover">
+        <% if user_signed_in? && current_user.is_dark_mode %>
+          <table class="table table-dark table-hover table-borderless table-striped">
+        <% else %>
+          <table id="table" class="table table-hover table-borderless table-striped">
+        <% end %>
 
         <thead class="thead-dark">
           <tr>
@@ -35,7 +37,6 @@
             <th>Category</th>
             <th>Company</th>
             <th></th>
-            <th> </th>
           </tr>
         </thead>
 
@@ -44,7 +45,7 @@
             <% c.job_postings.each do |jp| %>
                 <tr>
                   <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-                  <td>tag</td>
+                  <td><%= jp.tag_list[0].titleize %></td>
                   <td><%= c.name %></td>
                   <td><%= link_to 'Applications', job_applications_r_path(current_user, jp) %></td>
                 </tr>
@@ -56,138 +57,172 @@
       <%=link_to "+ NEW job posting", new_job_posting_path %>
       <%=link_to "+ NEW company", new_company_path %>
 
-    <% end %>
+      <% end %>
 
-    <% if @user.is_recruiter == true %>
-      <div class="column" style="background-color:#FFFFFF; float:right">
+      <% if @user.is_recruiter == true %>
+        <div class="column float:right" >
           <h2>My companies</h2>
-            <table>
-              <% @user.companies.each do |c| %>
-                <tr>
-                  <th><%= link_to c.name, company_path(c) %></th>
-                </tr>
-                
+            <% if user_signed_in? && current_user.is_dark_mode %>
+              <table class="table table-dark table-hover table-borderless table-striped">
+            <% else %>
+              <table id="table" class="table table-hover table-borderless table-striped">
+            <% end %>
+                <tbody>
+                  <% @user.companies.each do |c| %>
+                    <tr>
+                      <th><%= link_to c.name, company_path(c) %></th>
+                    </tr>
+                  <% end %>
+                </tbody>
+            <% end %>
+          </table>
+        </div>
+
+        <%=link_to "+ NEW job posting", new_job_posting_path %>
+        <%=link_to "+ NEW company", new_company_path %>
+
+      <% end %>
+
+      <% if @user.is_recruiter == true %>
+        <div class="column" style="float:right">
+            <h2>My companies</h2>
+              <% if user_signed_in? && current_user.is_dark_mode %>
+                <table class="table table-dark table-hover table-borderless table-striped">
+              <% else %>
+                <table id="table" class="table table-hover table-borderless table-striped">
               <% end %>
-            </table>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <div class="column" style="background-color:#FFFFFF;">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>          
-
-          <div class="field">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-          </div><br />
-
-          <% if @user.is_recruiter == false %>     
-            <div class="float-right">
-              <b>Categories of Interest</b><br />
-              <div class="field">
-                <%= f.collection_check_boxes(:tag_list, valid_interests, :first, :first) do |b| %>
-                  <div class="form-check">
-                    <% if !@user.tag_list.include?(b.value.downcase) %>
-                      <label class="form-check-label"><%= b.check_box class: 'form-check-input' %> <%= b.value %></label>
-                    <% end %>
-                    <% if @user.tag_list.include?(b.value.downcase) %>
-                      <%= b.label(class: "form-check-label") { b.check_box(checked: true, class: "form-check-input") + b.value }  %> 
-                    <% end %>
-                  </div>
+                <% @user.companies.each do |c| %>
+                  <tr>
+                    <th><%= link_to c.name, company_path(c) %></th>
+                  </tr>                  
                 <% end %>
-              </div><br /> 
-            </div>    
-          <%end%>
+              </table>
+        </div>
+      <% end %>
 
-          <div class="field">
-            First Name<br />
-            <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
-          </div><br />
+      
+        <div class="column">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>          
 
-          <div class="field">
-            Last Name<br />
-            <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
-          </div><br />
-
-          <% if @user.is_recruiter == false %>
-
-            <div class="field">
-              Phone Number<br />
-              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
+            <br />
+            <div class="field" >                        
+              <%= f.check_box :is_dark_mode, autocomplete: "is_dark_mode", onclick: "darkMode()" %>
+              Join <a style="color: white">The <b>Dark Side</b></a>
             </div><br />
+            
+
+            <% if @user.is_recruiter == false %>     
+              <div class="float-right">
+                <b>Categories of Interest</b><br />
+                <div class="field">
+                  <%= f.collection_check_boxes(:tag_list, valid_interests, :first, :first) do |b| %>
+                    <div class="form-check">
+                      <% if !@user.tag_list.include?(b.value.downcase) %>
+                        <label class="form-check-label"><%= b.check_box class: 'form-check-input' %> <%= b.value %></label>
+                      <% end %>
+                      <% if @user.tag_list.include?(b.value.downcase) %>
+                        <%= b.label(class: "form-check-label") { b.check_box(checked: true, class: "form-check-input") + b.value }  %> 
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div><br /> 
+              </div>    
+            <%end%>
 
             <div class="field">
-              Address<br />
-              <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-            </div><br />
-
-            <div class="field">
-              Highest Degree<br />
-              <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
-            </div><br />
-
-            <div class="field">
-              School of Highest Degree<br />
-              <%= f.text_field :address, autofocus: true, autocomplete: "highest_degree_school" %>
-            </div><br />
-
-          <% end %>
-
-          <br />
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-
-          <div class="field">
-            <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", required: true %>
-          </div><br />
-
-
-
-          <div class="field">
-            <%= check_box_tag "change-password" %> Change Password?
-          </div><br />
-
-          <div id="new-password" style="display:none;">
-
-            <div class="field">
-              <i>(leave blank if you don't <br />want to change it)</i><br />
-              <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password" %>
-              <% if @minimum_password_length %>
-                <br />
-                <em><%= @minimum_password_length %> characters minimum</em>
-              <% end %>
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
             </div><br />          
 
             <div class="field">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "New Password Confirmation" %>
+              First Name<br />
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
             </div><br />
 
-          </div>
+            <div class="field">
+              Last Name<br />
+              <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
+            </div><br />
 
-          <script type="text/javascript">
-            var checkbox = document.getElementById('change-password');
-            var details_div = document.getElementById('new-password');
-            checkbox.onchange = function() {
-              if(this.checked) {
-                details_div.style['display'] = 'block';
-              } else {
-                details_div.style['display'] = 'none';
-              }
-            };
-          </script>
+            <% if @user.is_recruiter == false %>
 
-          <div class="actions">
-            <%= f.submit "Update" %>
-          </div><br /><br />
-        <% end %>
-      </div>
+              <div class="field">
+                Phone Number<br />
+                <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
+              </div><br />
+
+              <div class="field">
+                Address<br />
+                <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+              </div><br />
+
+              <div class="field">
+                Highest Degree<br />
+                <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
+              </div><br />
+
+              <div class="field">
+                School of Highest Degree<br />
+                <%= f.text_field :highest_degree_school, autofocus: true, autocomplete: "highest_degree_school" %>
+              </div><br />
+
+            <% end %>
+
+            <br />
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+
+            <div class="field">
+              <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", required: true %>
+            </div><br />
+
+
+
+            <div class="field">
+              <%= check_box_tag "change-password" %> Change Password?
+            </div><br />
+
+            <div id="new-password" style="display:none;">
+
+              <div class="field">
+                <i>(leave blank if you don't <br />want to change it)</i><br />
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password" %>
+                <% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div><br />          
+
+              <div class="field">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "New Password Confirmation" %>
+              </div><br />
+
+            </div>
+
+            <script type="text/javascript">
+              var checkbox = document.getElementById('change-password');
+              var details_div = document.getElementById('new-password');
+              checkbox.onchange = function() {
+                if(this.checked) {
+                  details_div.style['display'] = 'block';
+                } else {
+                  details_div.style['display'] = 'none';
+                }
+              };
+            </script>
+
+            <div class="actions">
+              <%= f.submit "Update" %>
+            </div><br /><br />
+          <% end %>
+        </div>
+      
+
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+      <p><%= link_to "Back", :back %></p>
     </div>
-
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-    <p><%= link_to "Back", :back %></p>
-    
   </body>
 
 </html>

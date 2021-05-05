@@ -1,19 +1,22 @@
-<h1><%= @job_postings.company.name %></h1>
-<h2> <%= @job_postings.title %> </h2>
-<h3> <%= @job_postings.tag_list[0].titlecase %> </h3>
+<div id="bootstrap-overrides">
+  <h1 style="text-align:center"><b><%= @job_postings.company.name %></b></h1>
+  <h2 style="text-align:center"> <%= @job_postings.title %> </h2>
+  <h3 style="text-align:center"> <%= @job_postings.tag_list[0].titlecase %> </h3>
+  <br /><br /><br />
+  <h6> Description </h6>
+  <p><%= @job_postings.summary %></p>
 
-<p>
-  Description: <%= @job_postings.summary %>
-</p>
+  <p style="text-align:right">
+    Experience needed: <%= @job_postings.experience_required %> year(s)
+  </p>
 
-<p>
-  Experience needed: <%= @job_postings.experience_required %> year(s)
-</p>
+  <% if !current_user.is_recruiter %>
+    <%= link_to 'Apply to this Job', new_job_application_path(@job_postings) %>
+  <% end %>
 
-<% if !current_user.is_recruiter %>
-  <%= link_to 'Apply to this Job', new_job_application_path(@job_postings) %>
-<% end %>
-
-<% if current_user == @job_postings.company.recruiter %>
-  <%= link_to "Delete", job_posting_path(@job_postings), method: :delete %>
-<% end %>
+  <% if current_user == @job_postings.company.recruiter %>
+    <%= link_to "Delete Job Posting", job_posting_path(@job_postings), method: :delete, 
+    data: { confirm: "Are you sure?
+  You will loose all job applications for this posting." } %>
+  <% end %>
+</div>
