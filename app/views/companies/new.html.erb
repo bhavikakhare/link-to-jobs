@@ -1,13 +1,26 @@
-<h1 style="padding: 10px"> Company </h1>
-<%= bootstrap_form_with model: @company, url: companies_path, method: :post, local: true do |f| %>
+<div class="bootstrap-overrides">
+  <html>
 
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.select :size, options_for_select(['small', 'medium', 'big'], "medium") %>
-  <%= f.number_field(:year_established, label: "Year of establishment" ) %>
-  <%= f.text_field :email %>
-  <%= f.number_field :phone_number %>
-  <%= f.text_area :address %>
-<%= f.submit "create" %>
 
-<% end %>
+    <body>
+      <h1 style="padding: 10px"> Company </h1>
+
+
+      <%= bootstrap_form_with model: @company, url: companies_path, method: :post, local: true do |f| %>
+
+        <div id='bootstrap-overrides'>
+          <%= f.text_field :name %>
+          <%= f.text_area :description %>
+          <%= f.select :size, options_for_select(['small', 'medium', 'big'], "medium") %>
+          <%= f.number_field(:year_established, label: "Year of establishment" ) %>
+          <%= f.text_field :email %>
+          <%= f.number_field :phone_number %>
+          <%= f.text_area :address %>
+        </div>
+        <%= f.submit "create" %>
+
+      <% end %>
+    </body>
+
+  </html>
+</div>

@@ -35,4 +35,10 @@ Rails.application.routes.draw do
   delete 'users/:user_id/job_applications/:id', to: 'job_applications#destroy'
   # New Page (Applicant)
   get 'job_postings/:id/new_job_application', to: 'job_applications#new', as: 'new_job_application'
+
+  #job posting questions
+  get 'job_postings/:id/questions', to: 'questions#index', as: 'jp_questions'
+  post 'job_postings/:id/questions/new', to: 'questions#create'
+  get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
+
 end
