@@ -10,10 +10,30 @@
       <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :address, :disabled => !current_user.is_recruiter? %>
     </div>
-    <% if current_user == @company.recruiter %>
-      <%= f.submit "update" %>
-    <% end %>
-
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm" style="padding:0;">
+          <% if current_user == @company.recruiter %>
+            <%= f.submit "Update", class:"btn btn-success float-left" %>
+          <% end %>
+        </div>
+        <div class="col-sm" style="padding:0; text-align:center;">
+          <% if current_user == @company.recruiter %>
+            <%= link_to "Delete", company_path(@company), method: :delete, data: { confirm: "Are you sure? 
+You will loose all job postings and applications for this company." }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+        <div class="col-sm" style="padding:0;">
+          <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
   <% end %>
 
   <!--
@@ -22,9 +42,7 @@
   </div>
   -->
 
-  <% if current_user == @company.recruiter %>
-    <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger float-left" %>
-  <% end %>
+  
 
-  <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
+  
 

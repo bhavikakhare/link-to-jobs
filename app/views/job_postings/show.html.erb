@@ -16,7 +16,7 @@
   
   <% if current_user == @job_postings.company.recruiter %>
     <%= link_to "Delete Job Posting", job_posting_path(@job_postings), method: :delete, 
-    data: { confirm: "Are you sure?
-  You will loose all job applications for this posting." }, class: 'btn btn-secondary btn-danger' %>
+    data: { confirm: "Are you sure? 
+You will loose all job applications for this posting." }, class: 'btn btn-secondary btn-danger' %>
   <% end %>
 </div>

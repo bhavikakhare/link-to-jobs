@@ -17,8 +17,8 @@
           <%= f.number_field :phone_number %>
           <%= f.text_area :address %>
         </div>
-        <%= f.submit "create" %>
-
+        <%= f.submit "Create", class: "btn btn-success float-left"  %>
+        <%= link_to 'Cancel', :back, class:"btn btn-danger float-right" %>
       <% end %>
     </body>
 
