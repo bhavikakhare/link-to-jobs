@@ -17,7 +17,7 @@ class JobPostingsController < ApplicationController
 
     def index
         @interests_only = false
-        search_title = params[:search_title]
+        search_title = params[:search_title].to_s.downcase
         search_company = params[:search_company].to_s.downcase
         if !search_title
           search_title = ""
