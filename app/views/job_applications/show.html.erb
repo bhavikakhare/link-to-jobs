@@ -49,7 +49,12 @@
         <% @questions.each do |question| %>
         <tr>
             <td><b><%= question.question %> : </b></td>
-            <td> answer </td>
+            <td style="align:justify;"> 
+                <% answer = question.answers.find_by(job_application_id: @application ) %>
+                <% if !answer.nil? %> 
+                    <%= answer.answer %>
+                <% end %>
+            </td>
             <br>
             <br>
         </tr>

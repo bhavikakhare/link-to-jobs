@@ -41,4 +41,8 @@ Rails.application.routes.draw do
   post 'job_postings/:id/questions/new', to: 'questions#create'
   get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
 
+  #job application answers
+  post 'job_postings/:posting_id/job_applications/:id/answers/new', to: 'questions#create'
+  get 'job_postings/:posting_id/job_applications/:id/answers/new', to: 'questions#new', as: 'new_jp_answer'
+
 end

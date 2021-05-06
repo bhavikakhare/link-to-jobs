@@ -112,7 +112,8 @@ posting3 = JobPosting.create!(
     experience_required: 3,
     is_closed: false,
     company: company3,
-    tag_list: 'Fashion Design'
+    tag_list: 'Fashion Design',
+)
 
 question1 = Question.create!(
     question: 'Link to Resume',
@@ -129,18 +130,31 @@ question3 = Question.create!(
     job_posting: posting2
  )
 
-posting1.users << [user1, user3]
+job_application_1 = JobApplication.create!(
+    job_posting: posting1,
+    user: user1,
+)
+job_application_2 = JobApplication.create!(
+    job_posting: posting1,
+    user: user3,
+)
 posting2.users << [user1]
 posting3.users << [user3]
 
-answer1 - Answer.create!(
-  answer: 'abcdefg'
+answer1 = Answer.create!(
+  answer: 'abc.d/efg/hi',
+  question: question1,
+  job_application: job_application_1,
 )
 
-answer2 - Answer.create!(
-  answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum est vitae aliquam dictum. Etiam bibendum ipsum quis facilisis congue. Maecenas vel convallis urna. Ut non commodo libero. Donec condimentum at ipsum ut cursus. Aliquam gravida, augue vitae rhoncus feugiat, eros massa volutpat massa, at posuere odio ex nec est. Etiam nec arcu facilisis, pulvinar lacus non, dapibus sapien. Proin in luctus nibh, at pharetra urna. Morbi ante eros, lacinia sit amet rhoncus id, malesuada eget eros. Ut nec erat nec est cursus pellentesque. Vivamus malesuada purus faucibus lectus efficitur, eget eleifend nibh mattis. Fusce mattis efficitur risus, ac varius velit venenatis eget. Phasellus est metus, molestie nec malesuada sed, pellentesque sed diam. Proin malesuada non ante sed finibus. Nulla tristique vel enim sit amet tempus. Integer sed nunc ut massa aliquet venenatis.'
+answer2 = Answer.create!(
+  answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum est vitae aliquam dictum. Etiam bibendum ipsum quis facilisis congue. Maecenas vel convallis urna. Ut non commodo libero. Donec condimentum at ipsum ut cursus. Aliquam gravida, augue vitae rhoncus feugiat, eros massa volutpat massa, at posuere odio ex nec est. Etiam nec arcu facilisis, pulvinar lacus non, dapibus sapien. Proin in luctus nibh, at pharetra urna. Morbi ante eros, lacinia sit amet rhoncus id, malesuada eget eros. Ut nec erat nec est cursus pellentesque. Vivamus malesuada purus faucibus lectus efficitur, eget eleifend nibh mattis. Fusce mattis efficitur risus, ac varius velit venenatis eget. Phasellus est metus, molestie nec malesuada sed, pellentesque sed diam. Proin malesuada non ante sed finibus. Nulla tristique vel enim sit amet tempus. Integer sed nunc ut massa aliquet venenatis.',
+  question: question2,
+  job_application: job_application_2,
 )
 
-answer3 - Answer.create!(
-  answer: '0123456789'
+answer3 = Answer.create!(
+  answer: '0123456789',
+  question: question2,
+  job_application: job_application_2,
 )
