@@ -46,7 +46,7 @@
               <% @job_postings.each do |jp| %>
                 <% if !user_signed_in? || !@interests_only || current_user.tag_list.include?(jp.tag_list[0].downcase) %>
                   <% if params[:search_category].blank? || params[:search_category].to_s.downcase == jp.tag_list[0].to_s %>
-                    <% if jp.is_closed == false %>
+                    <% if !jp.is_closed || jp.is_closed.to_s.strip.length == 0 %>
                       <tr>
                         <td style="white-space: nowrap;"><%= link_to jp.title, job_posting_path(jp) %></td>
                         <td style="white-space: nowrap;"><%= link_to jp.company.name.titleize, company_path(jp.company) %></td>
