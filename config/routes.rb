@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
 
 
+
   # Review Actions
   get 'companies/:company_id/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
 
@@ -50,5 +51,9 @@ Rails.application.routes.draw do
   patch 'companies/:company_id/reviews/:id', to: 'reviews#update', as: 'review'
   put 'companies/:company_id/reviews/:id', to: 'reviews#update'
   delete 'companies/:company_id/reviews/:id', to: 'reviews#destroy'
+
+  #close job posting
+  post 'job_postings/:id/close', to: 'job_postings#is_closed', as: 'is_closed'
+
 
 end

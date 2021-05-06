@@ -18,17 +18,26 @@ class JobPostingsController < ApplicationController
     def index
         @interests_only = false
         search_title = params[:search_title]
+        search_company = params[:search_company].to_s.downcase
         if !search_title
           search_title = ""
         end
         @interests_only = params[:interests_only]
         @job_postings = JobPosting.where("title LIKE ?", "%" + search_title + "%")
+        if !search_company.blank?
+          search_company_id = Company.find_by("lower(name) = ?", search_company.downcase)
+          @job_postings = @job_postings.where(company_id: search_company_id)
+        end
         render :index
     end
 
     def show
         @job_postings = JobPosting.find(params[:id])
-        render :show
+        if current_user.is_recruiter == false && @job_postings.is_closed == true
+          redirect_to job_postings_url, flash: { error: "Job posting is closed." }
+        else
+          render :show
+        end
     end
 
     def new
@@ -37,7 +46,7 @@ class JobPostingsController < ApplicationController
     end
 
     def create
-        @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required, :company_id, :tag_list))
+        @job_posting = JobPosting.new(params.require(:job_posting).permit(:title, :job_category, :summary, :experience_required, :company_id, :tag_list, :is_closed))
         if @job_posting.save
             @question = @job_posting.questions.build(params.permit(:question)) 
             flash[:success] = "New job posting successfully added!"
@@ -56,5 +65,10 @@ class JobPostingsController < ApplicationController
 
     end
 
+    def is_closed
+      @job_posting = JobPosting.find(params[:id])
+      @job_posting.update(is_closed: true)
+      redirect_to job_posting_url
+    end
 
 end
