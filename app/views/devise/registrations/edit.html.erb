@@ -56,7 +56,7 @@
           <% @user.companies.each do |c| %>
             <% c.job_postings.each do |jp| %>
               <% if jp.is_closed %>
-                <tr style="border:1px solid #FF0000">
+                <tr>
                   <td style="color:#FF0000"><%= link_to jp.title, job_posting_path(jp) %></td> 
                   <td style="color:#FF0000"><%= jp.tag_list[0].titleize %></td>
                   <td style="color:#FF0000"><%= c.name %></td>
@@ -130,7 +130,7 @@
 
         <br /><br />
         <div class="column">
-          <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>          
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>          
 
             <div class="container">
               <div class="row">
@@ -209,7 +209,7 @@
                 <div class="col">
                   <% if @user.is_recruiter == false %>     
                     <div class="float-right">
-                      <br /><br /><br /><br />
+                      <br /><br />
                       <b>Categories of Interest</b><br />
                       <div class="field">
                         <%= f.collection_check_boxes(:tag_list, valid_interests, :first, :first, label: '&nbsp;'.html_safe) do |b| %>

@@ -1,6 +1,6 @@
 <div id='bootstrap-overrides'>
   <h1 style="padding: 10px"> <%= @company.name %> </h1>
-  <h3><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s) </h3>
+  <h5><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s) </h5>
   <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
       <%= f.text_field :name, :disabled => !(@company.recruiter == current_user) %>
       <%= f.text_area :description, :disabled => !(@company.recruiter == current_user) %>
@@ -44,46 +44,50 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :company_id, value: @company.id %>
       <br />
-      <%= f.submit 'Add Review' %>
+      <%= f.submit 'Add Review', class: "btn btn-success" %>
     <% end %>
   <hr style = 'border-width: 2px; background-color:#000000'/>
   <% end %>
-  <% if user_signed_in? && current_user.is_dark_mode %>
-    <table class="table table-dark table-hover table-borderless table-striped" style = 'table-layout: fixed; width:100%;'>
-    <thead>
-  <% else %>
-    <table class="table table-hover table-borderless table-striped" style = 'table-layout: fixed; width:100%;'>
-    <thead class="thead-dark">
-  <% end %>
-      <tr>
-        <th style = 'width:100px;'>Rating</th>
-        <th>Review</th>
-        <th style = 'width:200px;'>User</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% @company.reviews.each do |review| %>
-        <tr style = 'border: 2px solid black'>
-          <td><%= review.rating_5 %></td>
-          <td style = 'word-wrap: break-word'>
-            <%= review.review_text %>
-            <% if user_signed_in? && current_user == review.applicant %>
-              <br />
-              <br />
-              <span style = 'float: left;'><%= link_to 'Delete', review_path(review.company, review), method: :delete, 
-                class: 'btn btn-danger btn-sm', data: { confirm: "Are you sure want to delete this review?" } %></span>
-               <span style = 'float: right;'><%= link_to 'Edit', edit_review_path(review.company, review),  class: 'btn btn-info btn-sm' %></span> 
-            <% end %>
-          </td>
-          <td>
-            <% if review.anonymous %>
-              Anonymous
-            <% else %>
-              <%= review.applicant.first_name + ' ' + review.applicant.last_name %>
-            <% end %>
-          </td>      
+
+  <% if @company.reviews.count > 0 %>
+    <% if user_signed_in? && current_user.is_dark_mode %>
+      <table class="table table-dark table-hover table-borderless table-striped" style = 'table-layout: fixed; width:100%;'>
+      <thead>
+    <% else %>
+      <table class="table table-hover table-borderless table-striped" style = 'table-layout: fixed; width:100%;'>
+      <thead class="thead-dark">
+    <% end %>
+        <tr>
+          <th style = 'width:100px;'>Rating</th>
+          <th>Review</th>
+          <th style = 'width:200px;'>User</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+          <% @company.reviews.each do |review| %>
+          <tr style = 'border: 2px solid black'>
+            <td><%= review.rating_5 %></td>
+            <td style = 'word-wrap: break-word'>
+              <%= review.review_text %>
+              <% if user_signed_in? && current_user == review.applicant %>
+                <br />
+                <br />
+                <span style = 'float: left;'><%= link_to 'Delete', review_path(review.company, review), method: :delete, 
+                  class: 'btn btn-danger btn-sm', data: { confirm: "Are you sure want to delete this review?" } %></span>
+                <span style = 'float: right;'><%= link_to 'Edit', edit_review_path(review.company, review),  class: 'btn btn-info btn-sm' %></span> 
+              <% end %>
+            </td>
+            <td>
+              <% if review.anonymous %>
+                Anonymous
+              <% else %>
+                <%= review.applicant.first_name + ' ' + review.applicant.last_name %>
+              <% end %>
+            </td>      
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
 </div>

@@ -21,6 +21,6 @@
 
     <%= f.collection_select :question_id, @job_posting.questions, :id, :question %> <br/>
     <%= f.text_field :answer %> <br/>
-    <%= f.submit %>
-
+    <%= f.submit "Save Answer" %>
+    <div class="float-right"><%= link_to 'Done', job_postings_path, class: 'btn btn-success' %></div>
 <% end %>
