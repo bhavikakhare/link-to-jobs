@@ -38,6 +38,14 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
+  has_many(
+    :reviews,
+    class_name: 'Review',
+    foreign_key: 'review_id',
+    inverse_of: :applicant,
+    dependent: :destroy
+  )
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
@@ -49,7 +57,9 @@ class User < ApplicationRecord
   INTEREST_TAGS = ['Fashion Design', 'Fashion Merchandising', 'Graphic Arts', 'Interior Design', 'Web Development',
   'Finance', 'Robotics', 'Game Development', 'Film/Video','Food Industry','Public Service', 'Supply Chain', 'Law',
   'Medicine & Health', 'Digital Marketing','Human Resources','App Development','Ethical Hacking','Architecture',
-  'Plumbing','Photography','Career Advising']
+  'Plumbing','Photography','Career Advising', 'Computer Science', 'Business', 'Music']
   acts_as_taggable_on :tags
+
+  validates :tag_list, inclusion: User::INTEREST_TAGS.map(&:downcase)
   
 end
