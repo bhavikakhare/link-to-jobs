@@ -47,7 +47,7 @@ company1 = Company.create!(
     email:"apple@email.com",
     phone_number:11111111,
     avg_rating:3.0,
-    sum_ratings:0,
+    sum_ratings:6.0,
     count_ratings:2,
     size:"small",
     description:"We sell over-priced sleek phones that all look the same.",
@@ -59,9 +59,9 @@ company2 = Company.create!(
     name:"Ball",
     email:"ball@email.com",
     phone_number:11222211,
-    avg_rating:4.0,
-    sum_ratings:52,
-    count_ratings:13,
+    avg_rating:0.0,
+    sum_ratings:0.0,
+    count_ratings:0,
     size:"medium",
     description:"We sell bouncey rubber balls in bulk.",
     address:"Bouncey Ball Factory in Memphis",
@@ -72,8 +72,8 @@ company3 = Company.create!(
     name:"Calvin Klein",
     email:"ck@email.com",
     phone_number:11233211,
-    avg_rating:3.5,
-    sum_ratings:0,
+    avg_rating:0.0,
+    sum_ratings:0.0,
     count_ratings:0,
     size:"big",
     description:"We sell nice clothes.",
@@ -103,8 +103,8 @@ posting3 = JobPosting.create!(
     experience_required: 3,
     is_closed: false,
     company: company3,
-    tag_list: 'Fashion Design')
-
+    tag_list: 'Fashion Design'
+)
 posting4 = JobPosting.create!(
     title: 'Jr. Software Developer',
     summary: 'a software developer is need to build web apps in Ruby on Rails',

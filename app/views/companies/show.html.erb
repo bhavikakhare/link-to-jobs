@@ -1,6 +1,6 @@
 <div id='bootstrap-overrides'>
   <h1 style="padding: 10px"> <%= @company.name %> </h1>
-  <h3><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s)</h3>
+  <h3><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s) </h3>
   <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
       <%= f.text_field :name, :disabled => !(@company.recruiter == current_user) %>
       <%= f.text_area :description, :disabled => !(@company.recruiter == current_user) %>
