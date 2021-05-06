@@ -1,0 +1,26 @@
+<h1> Answer questions : </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Answered:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @answers.each do |a| %>
+            <tr>
+                <td>
+                    <b><%= a.question %></b> <%= a.answer %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= form_with model: @answer, url: new_jp_answer_path, method: :post, local: true do |f| %>
+
+    <%= f.text_field :answer %>
+    <%= f. :question %>
+    <%= f.submit %>
+
+<% end %>
