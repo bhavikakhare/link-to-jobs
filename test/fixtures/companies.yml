@@ -11,7 +11,7 @@
 #  name             :string
 #  phone_number     :bigint
 #  size             :string
-#  sum_ratings      :bigint
+#  sum_ratings      :decimal(, )
 #  year_established :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

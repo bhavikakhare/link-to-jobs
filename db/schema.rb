@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_210547) do
+ActiveRecord::Schema.define(version: 2021_05_06_050620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_210547) do
     t.bigint "phone_number"
     t.decimal "avg_rating"
     t.integer "count_ratings"
-    t.bigint "sum_ratings"
+    t.decimal "sum_ratings"
     t.string "address"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false

@@ -11,7 +11,7 @@
 #  name             :string
 #  phone_number     :bigint
 #  size             :string
-#  sum_ratings      :bigint
+#  sum_ratings      :decimal(, )
 #  year_established :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -64,7 +64,7 @@ class Company < ApplicationRecord
     validates :avg_rating, numericality: { greater_than_or_equal_to: 0.0, less_than_or_equal_to: 5.0, allow_nil: true, }
     validates :count_ratings, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
     validates :phone_number, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 1000000, less_than_or_equal_to: 9999999999 }
-    validates :sum_ratings, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
+    validates :sum_ratings, numericality: { only_decimal: true, allow_nil: true, greater_than_or_equal_to: 0 }
     validates :year_established, numericality: { only_integer: true, allow_nil: true, less_than_or_equal_to: ->(_company) { Date.current.year }, greater_than_or_equal_to: 1700 }
     # validate email format
     validates :email, format: { with: Devise.email_regexp, message: "invalid email" }

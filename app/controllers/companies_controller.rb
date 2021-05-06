@@ -31,7 +31,6 @@ class CompaniesController < ApplicationController
       @company.avg_rating = 0.0
       @company.count_ratings = 0
       @company.sum_ratings = 0
-
       if @company.save
         flash[:success] = "Company added successfully"
         redirect_to company_url(@company)
