@@ -1,8 +1,7 @@
-
+<div id='bootstrap-overrides'>
   <h1 style="padding: 10px"> <%= @company.name %> </h1>
   <h3><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s)</h3>
   <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
-    <div id='bootstrap-overrides'>
       <%= f.text_field :name, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :description, :disabled => !current_user.is_recruiter? %>
       <% if current_user == @company.recruiter %>
@@ -14,7 +13,6 @@
       <%= f.text_field :email, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :address, :disabled => !current_user.is_recruiter? %>
-    </div>
     <% if user_signed_in? && current_user == @company.recruiter %>
       <%= f.submit "Update" %>
     <% end %>
@@ -68,13 +66,7 @@
     </tbody>
   </table>
 
-  <!--
-  <div style="padding: 20px">
-    rated <%= @company.avg_rating %> by <%= @company.count_ratings %> users
-  </div>
-  -->
-
   <% if user_signed_in? && current_user == @company.recruiter %>
     <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %>
   <% end %>
-
+</div>
