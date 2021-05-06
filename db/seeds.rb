@@ -103,13 +103,6 @@ posting3 = JobPosting.create!(
     experience_required: 3,
     is_closed: false,
     company: company3,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    tag_list: 'Fashion Design'
-)
-=======
-=======
->>>>>>> 6ebe6a82293995d29b8f6d2a860fb3bd89fcdd5f
     tag_list: 'Fashion Design')
 
 posting4 = JobPosting.create!(
@@ -199,10 +192,6 @@ posting14 = JobPosting.create!(
     is_closed: false,
     company: company2,
     tag_list: 'Business')
-<<<<<<< HEAD
->>>>>>> d5a6503ebf2f75e257669a04e5f613d625a43e38
-=======
->>>>>>> 6ebe6a82293995d29b8f6d2a860fb3bd89fcdd5f
 
 question1 = Question.create!(
     question: 'Link to Resume',
