@@ -23,8 +23,10 @@
 
   </table>
 
-  <h1>Add New Custom Questions</h1>
-  <%= bootstrap_form_with model: @question, url: new_jp_question_path, method: :post, local: true do |f| %>
+
+<h1>Add New Custom Questions</h1>
+<%= bootstrap_form_with model: @question, url: new_jp_question_path, method: :post, local: true do |f| %>
+
 
       <%= f.text_field :question %>
       <%= f.submit %>

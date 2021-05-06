@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
 
 
+  #job application answers
+  post 'job_postings/:posting_id/job_applications/:id/answers/new', to: 'answers#create', as: 'new_ja_answer'
+  get 'job_postings/:posting_id/job_applications/:id/answers/new', to: 'answers#new'
 
   # Review Actions
   get 'companies/:company_id/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
