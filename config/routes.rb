@@ -41,8 +41,14 @@ Rails.application.routes.draw do
   post 'job_postings/:id/questions/new', to: 'questions#create'
   get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
 
-  # Review Create Action
+
+  # Review Actions
+  get 'companies/:company_id/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
+
   post 'companies/:id', to: 'reviews#create'
-  patch 'companies/:id', to: 'reviews#create'  
+
+  patch 'companies/:company_id/reviews/:id', to: 'reviews#update', as: 'review'
+  put 'companies/:company_id/reviews/:id', to: 'reviews#update'
+  delete 'companies/:company_id/reviews/:id', to: 'reviews#destroy'
 
 end

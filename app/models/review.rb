@@ -3,7 +3,8 @@
 # Table name: reviews
 #
 #  id          :bigint           not null, primary key
-#  rating_5    :integer
+#  anonymous   :boolean
+#  rating_5    :decimal(, )
 #  review_text :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -34,4 +35,7 @@ class Review < ApplicationRecord
         foreign_key: 'company_id',
         inverse_of: :reviews
     )
+
+    validates :rating_5, presence: true
+    validates :review_text, presence: true
 end

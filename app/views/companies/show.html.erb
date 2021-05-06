@@ -1,47 +1,68 @@
 
-  <h1 style="padding: 10px"> Company </h1>
+  <h1 style="padding: 10px"> <%= @company.name %> </h1>
+  <h3><%= @company.avg_rating %> average rating with <%= @company.count_ratings %> review(s)</h3>
   <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
     <div id='bootstrap-overrides'>
       <%= f.text_field :name, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :description, :disabled => !current_user.is_recruiter? %>
-      <%= f.select :size, ['small', 'medium', 'big'], :disabled => !current_user.is_recruiter? %>
+      <% if current_user == @company.recruiter %>
+        <%= f.select :size, ['small', 'medium', 'big'] %>
+      <% else %>
+        <%= f.text_field :size, :disabled => !current_user.is_recruiter? %>
+      <% end %>
       <%= f.number_field(:year_established, label: "Year of establishment", :disabled => !current_user.is_recruiter? ) %>
       <%= f.text_field :email, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :address, :disabled => !current_user.is_recruiter? %>
     </div>
-    <% if current_user == @company.recruiter %>
-      <%= f.submit "update" %>
+    <% if user_signed_in? && current_user == @company.recruiter %>
+      <%= f.submit "Update" %>
     <% end %>
 
   <% end %>
   <br />
   <hr style = 'border-width: 5px; background-color:#000000' />
-  <% if !current_user.is_recruiter %>
+  <% if user_signed_in? && !current_user.is_recruiter %>
     <h3>What do you think about <%= @company.name %>?  Let us know by adding a review</h3>
     <%= bootstrap_form_with model: @review, url: company_path(@company), method: :post, local: true do |f| %>
-      <%= f.select :rating_5, ['1', '2', '3', '4', '5'], label: 'Rating' %>
+      <%= f.select :rating_5, [5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.5], label: 'Rating' %>
       <%= f.text_area :review_text, label: 'Review' %>
+      <%= f.check_box :anonymous, label: 'Anonymous?' %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :company_id, value: @company.id %>
+      <br />
       <%= f.submit 'Add Review' %>
     <% end %>
-  <br />
+  <hr style = 'border-width: 2px; background-color:#000000'/>
   <% end %>
-  <table class="table table-hover">
+  <table class="table" style = 'table-layout: fixed; width:100%;'>
     <thead class="thead-dark">
       <tr>
-        <th>Rating</th>
+        <th style = 'width:100px;'>Rating</th>
         <th>Review</th>
-        <th>User</th>
+        <th style = 'width:200px;'>User</th>
       </tr>
     </thead>
     <tbody>
         <% @company.reviews.each do |review| %>
-        <tr>
+        <tr style = 'border: 2px solid black'>
           <td><%= review.rating_5 %></td>
-          <td><%= review.review_text %></td>
-          <td><%= review.applicant.first_name + ' ' + review.applicant.last_name %></td>
+          <td style = 'word-wrap: break-word'>
+            <%= review.review_text %>
+            <% if user_signed_in? && current_user == review.applicant %>
+              <br />
+              <br />
+              <span style = 'float: left;'><%= link_to 'Delete', review_path(review.company, review), method: :delete, class: 'btn btn-danger btn-sm' %></span>
+               <span style = 'float: right;'><%= link_to 'Edit', edit_review_path(review.company, review), class: 'btn btn-info btn-sm' %></span> 
+            <% end %>
+          </td>
+          <td>
+            <% if review.anonymous %>
+              Anonymous
+            <% else %>
+              <%= review.applicant.first_name + ' ' + review.applicant.last_name %>
+            <% end %>
+          </td>      
         </tr>
       <% end %>
     </tbody>
@@ -53,7 +74,7 @@
   </div>
   -->
 
-  <% if current_user == @company.recruiter %>
+  <% if user_signed_in? && current_user == @company.recruiter %>
     <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %>
   <% end %>
 

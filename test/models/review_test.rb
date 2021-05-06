@@ -3,7 +3,8 @@
 # Table name: reviews
 #
 #  id          :bigint           not null, primary key
-#  rating_5    :integer
+#  anonymous   :boolean
+#  rating_5    :decimal(, )
 #  review_text :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
