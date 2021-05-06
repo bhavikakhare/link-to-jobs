@@ -18,11 +18,16 @@ class JobPostingsController < ApplicationController
     def index
         @interests_only = false
         search_title = params[:search_title]
+        search_company = params[:search_company].to_s.downcase
         if !search_title
           search_title = ""
         end
         @interests_only = params[:interests_only]
         @job_postings = JobPosting.where("title LIKE ?", "%" + search_title + "%")
+        if !search_company.blank?
+          search_company_id = Company.find_by("lower(name) = ?", search_company.downcase)
+          @job_postings = @job_postings.where(company_id: search_company_id)
+        end
         render :index
     end
 

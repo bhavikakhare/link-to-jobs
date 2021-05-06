@@ -33,13 +33,13 @@
                <tr>
                   <%= form_tag(job_postings_path, method: :get) do %>
                     <td> <%= text_field_tag(:search_title, params[:search_title]) %> </td>
+                    <td> <%= text_field_tag(:search_company, params[:search_company]) %> </td>
                     <td> 
                       <%= text_field_tag(:search_category, params[:search_category]) %> <br/>
                       <% if user_signed_in? && !current_user.is_recruiter %> 
                         <%= check_box_tag(:interests_only, params[:interests_only]) %> See interests only
                       <% end %>
                     </td>
-                    <td></td>
                     <td> <%= submit_tag("search", :class => "btn btn-info") %> </td>
                   <% end %> 
                </tr>
