@@ -50,7 +50,7 @@
         <tr>
             <td><b><%= question.question %> : </b></td>
             <td style="align:justify;"> 
-                <% answer = question.answers.find_by(job_application_id: @application ) %>
+                <% answer = question.answers.find_by(job_application_id: @application.id ) %>
                 <% if !answer.nil? %> 
                     <%= answer.answer %>
                 <% end %>

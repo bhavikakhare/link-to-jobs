@@ -53,7 +53,7 @@ class JobApplicationsController < ApplicationController
         @application = JobApplication.new(params.require(:job_application).permit(:user_id, :job_posting_id))
         if @application.save
             flash[:success] = 'Application was successfully submitted'
-            redirect_to job_applications_a_url(current_user)
+            redirect_to new_ja_answer_url(@posting,@application)
         else
             flash.now[:error] = "You have errors.  Try again"
             render :new

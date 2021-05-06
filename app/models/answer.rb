@@ -25,4 +25,7 @@ class Answer < ApplicationRecord
     belongs_to :job_application
 
     validates :answer, presence: true
+    validates :job_application_id, presence: true
+    validates :question_id, presence: true
+    
 end
