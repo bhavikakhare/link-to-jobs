@@ -32,37 +32,42 @@
 
         </table>
 
-        <%= link_to 'Back', :back %> 
     <% else %>
-        
-        <h1 style = 'text-align:center'>Your Active Job Applications</h1>
-        <table class = 'table'>
-
+        <% if @applications.count > 0%>
+            <h1 style = 'text-align:center'>Your Active Job Applications</h1><br />
             <% if user_signed_in? && current_user.is_dark_mode %>
                 <table class="table table-dark table-hover table-borderless table-striped">
             <% else %>
                 <table class="table table-hover table-borderless table-striped">
             <% end %>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Category</th>
-                    <th>Company</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <% @applications.each do |app| %>
+                <thead>
                     <tr>
-                        <td><%= link_to app.job_posting.title, job_application_a_path(current_user, app) %></td>
-                        <td><%= app.job_posting.tag_list[0].titlecase %></td>
-                        <td><%= link_to app.job_posting.company.name, company_path(app.job_posting.company) %></td>
+                        <th>Job Title</th>
+                        <th>Category</th>
+                        <th>Company</th>
                     </tr>
-                <% end %>
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+                    <% @applications.each do |app| %>
+                        <tr>
+                            <td><%= link_to app.job_posting.title, job_application_a_path(current_user, app) %></td>
+                            <td><%= app.job_posting.tag_list[0].titlecase %></td>
+                            <td><%= link_to app.job_posting.company.name, company_path(app.job_posting.company) %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
 
-        <%= link_to 'Back', :back %> 
+            </table>
+        <% else %>
+            <h1 style = 'text-align:center'>Your Active Job Applications</h1><br />
+
+            <p  style = 'text-align:center'> You have no active job application. You can go back to the homepace and apply for jobs.</p>
+        <% end %>
+        
     <% end %>
-
+    
 </div>
+<br />
+
+<%= link_to 'Back', :back, class: 'btn btn-secondary btn-info float-right' %>

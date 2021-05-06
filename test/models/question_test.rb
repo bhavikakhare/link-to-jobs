@@ -22,16 +22,18 @@ class QuestionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
-end
 
-test "fixtures are valid" do
-  questions.each do |q|
-    assert q.valid?
+
+  test "fixtures are valid" do
+    questions.each do |q|
+      assert q.valid?
+    end
   end
-end
 
-test "question must be present" do
-  question = questions(:one)
-  question.question = ''
-  assert_not question.valid?
+  test "question must be present" do
+    question = questions(:one)
+    question.question = ''
+    assert_not question.valid?
+  end
+
 end

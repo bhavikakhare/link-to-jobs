@@ -10,18 +10,14 @@
 
         <thead>
             <tr>
-                <th>Question</th>
-                <th>Answer</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>First Name</td>
-                <td><%= @application.user.first_name %></td>
-            </tr>
-            <tr>
-                <td>Last Name</td>
-                <td><%= @application.user.last_name %></td>
+                <td>Name</td>
+                <td><%= link_to "#{@application.user.first_name} #{@application.user.last_name}", user_profile_path(@application.user) %></td>
             </tr>
             <tr>
                 <td>Phone Number</td>
@@ -29,7 +25,7 @@
             </tr>
             <tr>
                 <td>Email</td>
-                <td><%= @application.user.email %></td>
+                <td><%= mail_to @application.user.email, "#{@application.user.email}" %></td> 
             </tr>
             <tr>
                 <td>Address</td>
@@ -45,26 +41,30 @@
             </tr>
         </tbody>
     </table>
-    <p>
-        <% @questions.each do |question| %>
-        <tr>
-            <td><b><%= question.question %> : </b></td>
-            <td> answer </td>
-            <br>
-            <br>
-        </tr>
-        <% end %>
-    </p>
-    <p>
-        <% if current_user.is_recruiter %>
-            <%= link_to 'Back', job_applications_r_path(current_user, @posting) %>
-        <% else %>
-            <%= link_to 'Back', job_applications_a_path(current_user) %>
-        <% end %>
-    </p>
-    <p>
-        <% if !current_user.is_recruiter %>
-            <%= link_to 'Revoke this Application', job_application_a_path(current_user), method: :delete %>
-        <% end %>
-    </p>
+    <br />
+    <% if @questions.count > 0 %>
+        <h3> Questions</h3>
+        <p>
+            <table>
+                <tbody>
+                    <% @questions.each do |question| %>
+                        <tr>
+                            <td><b><%= question.question %> </b></td>
+                        </tr>
+                        <tr><td><i> some answer </i></td></tr>
+                        <tr><td style="color: transparent">Testing this empty row</td></tr>
+                    <% end %>
+                </tbody>
+            </table>            
+        </p>
+    <% end %>
+    
+    <br /><br />
+    <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
+
+
+    <% if !current_user.is_recruiter %>
+        <%= link_to 'Revoke this Application', job_application_a_path(current_user), method: :delete, class:"btn btn-danger float-left" %>
+    <% end %>
+    
 </div>

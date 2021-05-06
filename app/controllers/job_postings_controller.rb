@@ -16,7 +16,13 @@ class JobPostingsController < ApplicationController
     end
 
     def index
-        @job_postings = JobPosting.all
+        @interests_only = false
+        search_title = params[:search_title]
+        if !search_title
+          search_title = ""
+        end
+        @interests_only = params[:interests_only]
+        @job_postings = JobPosting.where("title LIKE ?", "%" + search_title + "%")
         render :index
     end
 
