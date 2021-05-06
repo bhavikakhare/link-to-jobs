@@ -42,6 +42,6 @@ Rails.application.routes.draw do
   get 'job_postings/:id/questions/new', to: 'questions#new', as: 'new_jp_question'
 
   #close job posting
-  post 'job_postings/:id', to: 'job_postings#is_closed', as: 'is_closed'
+  post 'job_postings/:id/close', to: 'job_postings#is_closed', as: 'is_closed'
 
 end

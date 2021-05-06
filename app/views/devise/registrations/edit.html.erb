@@ -29,9 +29,6 @@
     <div id="bootstrap-overrides">
       <%= render "devise/shared/error_messages", resource: resource %>
       <h1 style="text-align: center; font-weight: bold;"><%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %></h1>
-      <% if !current_user.is_recruiter %>
-        <p style="text-align: center;"><%= link_to 'Active Job Applications', job_applications_a_path(current_user) %></p>
-      <% end %>
       <br /><br />
 
       <% if current_user.is_recruiter == true && (@user.companies.map{|x| x.job_postings.count}).sum > 0 %>
@@ -58,16 +55,29 @@
         <tbody>
           <% @user.companies.each do |c| %>
             <% c.job_postings.each do |jp| %>
-                <tr>
-                  <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-                  <td><%= jp.tag_list[0].titleize %></td>
-                  <td><%= c.name %></td>
-                  <td style="text-align: center"><%= jp.job_applications.count %></td>
-                  <td><% if jp.job_applications.count > 0 %>
-                        <%= link_to 'View Applications', job_applications_r_path(current_user, jp) %>
+              <% if jp.is_closed %>
+                <tr style="border:1px solid #FF0000">
+                  <td style="color:#FF0000"><%= link_to jp.title, job_posting_path(jp) %></td> 
+                  <td style="color:#FF0000"><%= jp.tag_list[0].titleize %></td>
+                  <td style="color:#FF0000"><%= c.name %></td>
+                  <td style="text-align: center;color:#FF0000"> <%= jp.job_applications.count %></td>
+                  <% if jp.job_applications.count > 0 %>
+                        <td style="color:#FF0000"><%= link_to 'View Applications', job_applications_r_path(current_user, jp) %></td>
                       <% end %>
-                  </td>
+                  
                 </tr>
+                <% else %>
+                  <tr>
+                    <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+                    <td><%= jp.tag_list[0].titleize %></td>
+                    <td><%= c.name %></td>
+                    <td style="text-align: center"><%= jp.job_applications.count %></td>
+                    <td><% if jp.job_applications.count > 0 %>
+                          <%= link_to 'View Applications', job_applications_r_path(current_user, jp) %>
+                        <% end %>
+                    </td>
+                  </tr>
+              <% end%>  
             <% end %>
           <% end %>
         </tbody>
@@ -76,7 +86,6 @@
         <%=link_to "+ NEW Job Posting", new_job_posting_path, class: 'btn btn-secondary btn-success  btn-sm' %>
         <br /><br />
       <% end %>
-
       <% if @user.is_recruiter == true && @user.companies.count > 0 %>
         <div class="column float-right" >
           <h2>My Companies</h2>
@@ -162,59 +171,6 @@
                     </div><br />
 
                   <% end %>
-                </div><br /> 
-              </div>    
-            <%end%>
-            
-            <div class="field">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-            </div><br />          
-
-            <div class="field">
-              First Name<br />
-              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", required: true %>
-            </div><br />
-
-            <div class="field">
-              Last Name<br />
-              <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", required: true %>
-            </div><br />
-
-            <% if @user.is_recruiter == false %>
-
-              <div class="field">
-                Phone Number<br />
-                <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
-              </div><br />
-
-              <div class="field">
-                Address<br />
-                <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-              </div><br />
-
-              <div class="field">
-                Highest Degree<br />
-                <%= f.select :highest_degree, ['Associate',"Bachelor's","Master's","Doctoral"], autofocus: true %>
-              </div><br />
-
-              <div class="field">
-                School of Highest Degree<br />
-                <%= f.text_field :highest_degree_school, autofocus: true, autocomplete: "highest_degree_school" %>
-              </div><br />
-
-            <% end %>
-
-            <br />
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-            <% end %>
-
-            <div class="field">
-              <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", required: true %>
-            </div><br />
-
-
 
                   <br />
                   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -271,10 +227,6 @@
                   <%end%>
                 </div>
             </div>
-
-            <div class="actions">
-              <%= f.submit "Update", class: 'btn btn-secondary btn-success' %>
-            </div><br /><br />
             <br />
             
           <% end %>

@@ -2,26 +2,38 @@
   <h1 style="text-align:center"><b><%= @job_postings.company.name %></b></h1>
   <h2 style="text-align:center"> <%= @job_postings.title %> </h2>
   <h3 style="text-align:center"> <%= @job_postings.tag_list[0].titlecase %> </h3>
-  <br /><br /><br />
+  <br />
+      <% if @job_postings.is_closed %>
+      <p style="color:#FF0000;text-align:center">We are no longer accepting applications </p>
+      <% end %>
+  <br />
   <h6> Description </h6>
   <p><%= @job_postings.summary %></p>
 
   <p style="text-align:right">
-    Experience needed: <%= @job_postings.experience_required %> year(s)
+    Experience needed: <%= @job_postings.experience_required %> year(s) <br>
   </p>
   <br /><br />
   <% if !current_user.is_recruiter %>
     <%= link_to 'Apply to this Job', new_job_application_path(@job_postings), class: 'btn btn-secondary btn-success' %>
   <% end %>
   
-  <% if current_user == @job_postings.company.recruiter %>
-    <%= link_to "Delete Job Posting", job_posting_path(@job_postings), method: :delete, 
-    data: { confirm: "Are you sure? 
-You will loose all job applications for this posting." }, class: 'btn btn-secondary btn-danger' %>
-
-    <%= button_to "Close Job Posting", is_closed_path %>
-  <% end %>
-
-  <% end %>
-  <%= link_to 'Back', :back, class: 'btn btn-secondary btn-info float-right' %>
-</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm" style="padding:0;">
+        <% if current_user == @job_postings.company.recruiter %>
+          <%= link_to "Delete", job_posting_path(@job_postings), method: :delete, 
+          data: { confirm: "Are you sure? 
+          You will loose all job applications for this posting." }, class: 'btn btn-secondary btn-danger' %>
+        <% end %>
+      </div>
+      <div class="col-sm" style="padding:0; text-align:center;">
+        <% if current_user == @job_postings.company.recruiter %>
+          <%= button_to "Close", is_closed_path, class: 'btn btn-secondary btn-primary' %>
+        <% end %>
+      </div>
+      <div class="col-sm" style="padding:0;">
+        <%= link_to 'Back', :back, class: 'btn btn-secondary btn-info float-right' %>
+      </div>
+    </div>
+  </div>

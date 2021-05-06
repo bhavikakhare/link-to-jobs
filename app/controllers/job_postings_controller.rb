@@ -28,7 +28,11 @@ class JobPostingsController < ApplicationController
 
     def show
         @job_postings = JobPosting.find(params[:id])
-        render :show
+        if current_user.is_recruiter == false && @job_postings.is_closed == true
+          redirect_to job_postings_url, flash: { error: "Job posting is closed." }
+        else
+          render :show
+        end
     end
 
     def new
@@ -59,7 +63,7 @@ class JobPostingsController < ApplicationController
     def is_closed
       @job_posting = JobPosting.find(params[:id])
       @job_posting.update(is_closed: true)
-      redirect_to job_postings_url
+      redirect_to job_posting_url
     end
 
 end
