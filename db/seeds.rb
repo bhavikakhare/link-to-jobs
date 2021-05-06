@@ -15,7 +15,8 @@ user1 = User.create!(
     address: '123 Sesame Street',
     highest_degree: 'Bachelor\'s',
     highest_degree_school: 'UoM',
-    phone_number: '901-323-2392')
+    phone_number: '901-323-2392', 
+    is_dark_mode: 1)
 
 user2 = User.create!(
     email: "bhavika@email.com",
