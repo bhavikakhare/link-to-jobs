@@ -55,16 +55,29 @@
         <tbody>
           <% @user.companies.each do |c| %>
             <% c.job_postings.each do |jp| %>
-                <tr>
-                  <td><%= link_to jp.title, job_posting_path(jp) %></td> 
-                  <td><%= jp.tag_list[0].titleize %></td>
-                  <td><%= c.name %></td>
-                  <td style="text-align: center"><%= jp.job_applications.count %></td>
-                  <td><% if jp.job_applications.count > 0 %>
-                        <%= link_to 'View Applications', job_applications_r_path(current_user, jp) %>
+              <% if jp.is_closed %>
+                <tr style="border:1px solid #FF0000">
+                  <td style="color:#FF0000"><%= link_to jp.title, job_posting_path(jp) %></td> 
+                  <td style="color:#FF0000"><%= jp.tag_list[0].titleize %></td>
+                  <td style="color:#FF0000"><%= c.name %></td>
+                  <td style="text-align: center;color:#FF0000"> <%= jp.job_applications.count %></td>
+                  <% if jp.job_applications.count > 0 %>
+                        <td style="color:#FF0000"><%= link_to 'View Applications', job_applications_r_path(current_user, jp) %></td>
                       <% end %>
-                  </td>
+                  
                 </tr>
+                <% else %>
+                  <tr>
+                    <td><%= link_to jp.title, job_posting_path(jp) %></td> 
+                    <td><%= jp.tag_list[0].titleize %></td>
+                    <td><%= c.name %></td>
+                    <td style="text-align: center"><%= jp.job_applications.count %></td>
+                    <td><% if jp.job_applications.count > 0 %>
+                          <%= link_to 'View Applications', job_applications_r_path(current_user, jp) %>
+                        <% end %>
+                    </td>
+                  </tr>
+              <% end%>  
             <% end %>
           <% end %>
         </tbody>
@@ -73,7 +86,6 @@
         <%=link_to "+ NEW Job Posting", new_job_posting_path, class: 'btn btn-secondary btn-success  btn-sm' %>
         <br /><br />
       <% end %>
-
       <% if @user.is_recruiter == true && @user.companies.count > 0 %>
         <div class="column float-right" >
           <h2>My Companies</h2>

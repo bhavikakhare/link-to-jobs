@@ -38,6 +38,14 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
+  has_many(
+    :reviews,
+    class_name: 'Review',
+    foreign_key: 'review_id',
+    inverse_of: :applicant,
+    dependent: :destroy
+  )
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
