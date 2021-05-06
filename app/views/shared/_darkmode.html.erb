@@ -51,16 +51,23 @@
         border: 1px solid lime;
         border-radius: 4px;       
       }
-      table a, a:visited, #bootstrap-overrides a{
+      table a, table a:visited, #bootstrap-overrides table a, #bootstrap-overrides table a:visited{
         color: #02b845;        
         background-color: transparent;
-        text-decoration: none;
+        text-decoration: bold;
       }
-      table a:hover, #bootstrap-overrides a:hover{
+      table a:hover, #bootstrap-overrides a:hover, a:hover{
         color: lime;
-        background-color: transparent;
         text-decoration: none;
         text-decoration: bold;
+      }
+
+      hr{
+        border: 1px solid #2e2e2e;
+      }
+
+      #bootstrap-overrides textarea:disabled, #bootstrap-overrides input:not([type=submit]):disabled, #bootstrap-overrides select:disabled{
+        border: 1px solid #969400;       
       }
       
     <% end %>

@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
     before_action :authenticate_user!
     before_action :is_applicant
-    before_action :require_permission
+    before_action :require_permission, except: [:create]
 
     def is_applicant
         if current_user.is_recruiter
