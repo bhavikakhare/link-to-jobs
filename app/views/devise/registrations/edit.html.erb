@@ -7,28 +7,40 @@
         element.classList.toggle("dark-mode");
         element2.classList.toggle("table-dark");
       }
-    </script>  
+    </script>
+
+    <script type="text/javascript">
+      var checkbox = document.getElementById('change-password');
+      var details_div = document.getElementById('new-password');
+      checkbox.onchange = function() {
+        if(this.checked) {
+          details_div.style['display'] = 'block';
+        } else {
+          details_div.style['display'] = 'none';
+        }
+      };
+    </script>
+
   </head>
 
   <body>
     <div id="bootstrap-overrides">
       <%= render "devise/shared/error_messages", resource: resource %>
-      <h2>Profile of <%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %> </h2>
+      <h1 style="text-align: center; font-weight: bold;"><%= current_user.first_name.capitalize  %> <%= current_user.last_name.capitalize %></h1>
       <% if !current_user.is_recruiter %>
-        <%= link_to 'See Your Active Job Applications', job_applications_a_path(current_user) %>
+        <p style="text-align: center;"><%= link_to 'Active Job Applications', job_applications_a_path(current_user) %></p>
       <% end %>
       <br /><br />
 
-      <% if current_user.is_recruiter == true %>
-
+      <% if current_user.is_recruiter == true && (@user.companies.map{|x| x.job_postings.count}).sum > 0 %>
         <h2>
           My Job Postings
         </h2>
 
         <% if user_signed_in? && current_user.is_dark_mode %>
-          <table class="table table-dark table-hover table-borderless table-striped">
-        <% else %>
-          <table id="table" class="table table-hover table-borderless table-striped">
+          <table class="table table-dark table-hover table-borderless table-striped ">
+          <% else %>
+            <table id="table" class="table table-hover table-borderless table-striped">
         <% end %>
 
         <thead class="thead-dark">
@@ -36,6 +48,7 @@
             <th>Job Title</th>
             <th>Category</th>
             <th>Company</th>
+            <th style="text-align: center">Total Applications</th>
             <th></th>
           </tr>
         </thead>
@@ -47,54 +60,57 @@
                   <td><%= link_to jp.title, job_posting_path(jp) %></td> 
                   <td><%= jp.tag_list[0].titleize %></td>
                   <td><%= c.name %></td>
-                  <td><%= link_to 'Applications', job_applications_r_path(current_user, jp) %></td>
+                  <td style="text-align: center"><%= jp.job_applications.count %></td>
+                  <td><%= link_to 'View Applications', job_applications_r_path(current_user, jp) %></td>
                 </tr>
             <% end %>
           <% end %>
         </tbody>
-      </table>
+        </table>
 
-      <%=link_to "+ NEW job posting", new_job_posting_path %>
-      <%=link_to "+ NEW company", new_company_path %>
-
-      <% if @user.is_recruiter == true %>
-        <div class="column float:right" >
-          <h2>My companies</h2>
-            <% if user_signed_in? && current_user.is_dark_mode %>
-              <table class="table table-dark table-hover table-borderless table-striped">
-            <% else %>
-              <table id="table" class="table table-hover table-borderless table-striped">
-            <% end %>
-                <tbody>
-                  <% @user.companies.each do |c| %>
-                    <tr>
-                      <th><%= link_to c.name, company_path(c) %></th>
-                    </tr>
-                  <% end %>
-                </tbody>
-            <% end %>
-          </table>
-        </div>
-
-        <%=link_to "+ NEW job posting", new_job_posting_path %>
-        <%=link_to "+ NEW company", new_company_path %>
-
+        <%=link_to "+ NEW Job Posting", new_job_posting_path %>
+        <br /><br />
       <% end %>
 
-      <% if @user.is_recruiter == true %>
-        <div class="column" style="float:right">
-            <h2>My companies</h2>
-              <% if user_signed_in? && current_user.is_dark_mode %>
-                <table class="table table-dark table-hover table-borderless table-striped">
+      <% if @user.is_recruiter == true && @user.companies.count > 0 %>
+        <div class="column float-right" >
+          <h2>My Companies</h2>
+            <% if user_signed_in? && current_user.is_dark_mode %>
+              <table class="table table-dark table-hover table-borderless table-striped w-auto">
               <% else %>
-                <table id="table" class="table table-hover table-borderless table-striped">
-              <% end %>
+                <table id="table" class="table table-hover table-borderless table-striped w-auto">
+            <% end %>
+              <thead class="thead-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Year</th>
+                  <th>Email</th>
+                  <th>Job Postings</th>
+                  <th>Job Applications</th>
+                </tr>
+              </thead>
+              <tbody>
                 <% @user.companies.each do |c| %>
                   <tr>
-                    <th><%= link_to c.name, company_path(c) %></th>
-                  </tr>                  
+                    <td><%= link_to c.name, company_path(c) %></td>
+                    <td><%= c.year_established %></td>
+                    <td><%= c.email %></td>
+                    <td style="text-align: center"><%= c.job_postings.count %></td>
+                    <td style="text-align: center"><%= (c.job_postings.map{|x| x.job_applications.count}).sum %></td>
+                  </tr>
                 <% end %>
-              </table>
+              </tbody>
+            </table>        
+
+          <%=link_to "+ NEW Company", new_company_path %>
+          <br /><br />
+        </div>
+      <% else %>
+        <div class="float-right" style="height: 200px;
+          width: 30%;" >
+          <br /><br /><br /><br /><br />
+          <p> Thank you for registering. To begin, you may add your company from the link in the taskbar after which
+          you will be able to create posting for that company that will be available for applicants to apply for.</p>
         </div>
       <% end %>
 
@@ -126,7 +142,7 @@
                 </div><br /> 
               </div>    
             <%end%>
-
+            
             <div class="field">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
@@ -198,28 +214,19 @@
 
             </div>
 
-            <script type="text/javascript">
-              var checkbox = document.getElementById('change-password');
-              var details_div = document.getElementById('new-password');
-              checkbox.onchange = function() {
-                if(this.checked) {
-                  details_div.style['display'] = 'block';
-                } else {
-                  details_div.style['display'] = 'none';
-                }
-              };
-            </script>
-
             <div class="actions">
-              <%= f.submit "Update" %>
+              <%= f.submit "Update", class: 'btn btn-secondary btn-success' %>
             </div><br /><br />
           <% end %>
         </div>
       
 
-      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-      <p><%= link_to "Back", :back %></p>
+      <p>
+      Unhappy? 
+      <%= button_to "Cancel My Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-secondary btn-danger  float-left' %>
+      <%= link_to "Back", :back, class: 'btn btn-secondary btn-info float-right' %>
+      <br /><br />
+      </p>
     </div>
   </body>
 

@@ -32,17 +32,15 @@
 
         </table>
 
-        <%= link_to 'Back', :back %> 
     <% else %>
         
-        <h1 style = 'text-align:center'>Your Active Job Applications</h1>
-        <table class = 'table'>
-
-            <% if user_signed_in? && current_user.is_dark_mode %>
-                <table class="table table-dark table-hover table-borderless table-striped">
-            <% else %>
-                <table class="table table-hover table-borderless table-striped">
-            <% end %>
+        <h1 style = 'text-align:center'>Your Active Job Applications</h1><br />
+        <% if user_signed_in? && current_user.is_dark_mode %>
+            <table class="table table-dark table-hover table-borderless table-striped">
+        <% else %>
+            <table class="table table-hover table-borderless table-striped">
+        <% end %>
+            <thead>
                 <tr>
                     <th>Job Title</th>
                     <th>Category</th>
@@ -62,7 +60,10 @@
 
         </table>
 
-        <%= link_to 'Back', :back %> 
+        
     <% end %>
-
+    
 </div>
+<br />
+
+<%= link_to 'Back', :back, class: 'btn btn-secondary btn-info float-right' %>

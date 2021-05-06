@@ -9,18 +9,17 @@
   <p style="text-align:right">
     Experience needed: <%= @job_postings.experience_required %> year(s)
   </p>
-
+  <br /><br />
   <% if !current_user.is_recruiter %>
-    <%= link_to 'Apply to this Job', new_job_application_path(@job_postings) %>
+    <%= link_to 'Apply to this Job', new_job_application_path(@job_postings), class: 'btn btn-secondary btn-success' %>
   <% end %>
-
+  
   <% if current_user == @job_postings.company.recruiter %>
     <%= link_to "Delete Job Posting", job_posting_path(@job_postings), method: :delete, 
-    data: { confirm: "Are you sure?
-  You will loose all job applications for this posting." } %>
-  
+    data: { confirm: "Are you sure? 
+You will loose all job applications for this posting." }, class: 'btn btn-secondary btn-danger' %>
+
     <%= button_to "Close Job Posting", is_closed_path %>
-  
   <% end %>
 
 

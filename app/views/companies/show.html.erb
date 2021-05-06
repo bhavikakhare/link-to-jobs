@@ -4,25 +4,35 @@
     <div id='bootstrap-overrides'>
       <%= f.text_field :name, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :description, :disabled => !current_user.is_recruiter? %>
-      <%= f.select :size, ['small', 'medium', 'big'], :disabled => !current_user.is_recruiter? %>
+      <%= f.select :size, ['small', 'medium', 'big'], {}, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field(:year_established, label: "Year of establishment", :disabled => !current_user.is_recruiter? ) %>
       <%= f.text_field :email, :disabled => !current_user.is_recruiter? %>
       <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
       <%= f.text_area :address, :disabled => !current_user.is_recruiter? %>
     </div>
-    <% if current_user == @company.recruiter %>
-      <%= f.submit "update" %>
-    <% end %>
-
-  <% end %>
-
-  <!--
-  <div style="padding: 20px">
-    rated <%= @company.avg_rating %> by <%= @company.count_ratings %> users
-  </div>
-  -->
-
-  <% if current_user == @company.recruiter %>
-    <%= link_to "Delete", company_path(@company), method: :delete, class: "btn btn-danger" %>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm" style="padding:0;">
+          <% if current_user == @company.recruiter %>
+            <%= f.submit "Update", class:"btn btn-success float-left" %>
+          <% end %>
+        </div>
+        <div class="col-sm" style="padding:0; text-align:center;">
+          <% if current_user == @company.recruiter %>
+            <%= link_to "Delete", company_path(@company), method: :delete, data: { confirm: "Are you sure? 
+You will loose all job postings and applications for this company." }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+        <div class="col-sm" style="padding:0;">
+          <%= link_to 'Back', :back, class:"btn btn-info float-right" %>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
   <% end %>
 
