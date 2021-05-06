@@ -1,0 +1,26 @@
+<h1> Answer questions : </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Answered:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @answers.each do |a| %>
+            <tr>
+                <td>
+                    <b><%= a.question.question %></b> <%= a.answer %> <br/>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table> <br/>
+
+<%= bootstrap_form_with model: @answer, url: new_ja_answer_path, method: :post, local: true do |f| %>
+
+    <%= f.collection_select :question_id, @job_posting.questions, :id, :question %> <br/>
+    <%= f.text_field :answer %> <br/>
+    <%= f.submit %>
+
+<% end %>

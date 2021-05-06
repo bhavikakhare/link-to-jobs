@@ -17,6 +17,8 @@
 #  fk_rails_...  (job_posting_id => job_postings.id)
 #
 class Question < ApplicationRecord
+    has_many :answers, dependent: :destroy
+    has_many :job_applications, through: :answers
 
     belongs_to(
         :job_posting,
