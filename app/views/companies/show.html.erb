@@ -11,14 +11,12 @@
       <%= f.text_area :address, :disabled => !(@company.recruiter == current_user) %>
     </div>
     <br />
+    <% if @company.recruiter == current_user %>
+      <%= f.submit "Update", class:"btn btn-success float-left" %>
+    <% end %>
     <div class="container">
       <div class="row">
-        <div class="col-sm" style="padding:0;">
-          <% if current_user == @company.recruiter %>
-            <%= f.submit "Update", class:"btn btn-success float-left" %>
-          <% end %>
-        </div>
-        <div class="col-sm" style="padding:0; text-align:center;">
+        <div class="col-sm" style="padding:0; text-align:right;">
           <% if current_user == @company.recruiter %>
             <%= link_to "Delete", company_path(@company), method: :delete, data: { confirm: "Are you sure? 
               You will loose all job postings and applications for this company." }, class: "btn btn-danger" %>
