@@ -62,5 +62,4 @@ class JobPostingsController < ApplicationController
       redirect_to job_postings_url
     end
 
-
 end
