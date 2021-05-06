@@ -2,13 +2,13 @@
   <h1 style="padding: 10px"> Company </h1>
   <%= bootstrap_form_with model: @company, url: company_path(@company), method: :patch, local: true do |f| %>
     <div id='bootstrap-overrides'>
-      <%= f.text_field :name, :disabled => !current_user.is_recruiter? %>
-      <%= f.text_area :description, :disabled => !current_user.is_recruiter? %>
-      <%= f.select :size, ['small', 'medium', 'big'], {}, :disabled => !current_user.is_recruiter? %>
-      <%= f.number_field(:year_established, label: "Year of establishment", :disabled => !current_user.is_recruiter? ) %>
-      <%= f.text_field :email, :disabled => !current_user.is_recruiter? %>
-      <%= f.number_field :phone_number, :disabled => !current_user.is_recruiter? %>
-      <%= f.text_area :address, :disabled => !current_user.is_recruiter? %>
+      <%= f.text_field :name, :disabled => !(@company.recruiter == current_user) %>
+      <%= f.text_area :description, :disabled => !(@company.recruiter == current_user) %>
+      <%= f.select :size, ['small', 'medium', 'big'], {}, :disabled => !(@company.recruiter == current_user) %>
+      <%= f.number_field(:year_established, label: "Year of establishment", :disabled => !(@company.recruiter == current_user) ) %>
+      <%= f.text_field :email, :disabled => !(@company.recruiter == current_user) %>
+      <%= f.number_field :phone_number, :disabled => !(@company.recruiter == current_user) %>
+      <%= f.text_area :address, :disabled => !(@company.recruiter == current_user) %>
     </div>
     <br />
     <div class="container">
