@@ -1,4 +1,4 @@
-The course instructor made the original repository private; this is a copy of the repository to display my work. 
+This is a copy of the private original repository, made to display my work. 
 
 # Project App Skeleton
 
